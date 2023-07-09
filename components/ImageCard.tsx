@@ -32,7 +32,7 @@ const ImageCard: NextPage<IProps> = ({ post }) => {
               <div className="flex items-center gap-2">
                 <p className="flex items-center md:text-md font-bold text-primary">
                   {post.postedBy.userName}
-                  {``}
+                  {` `}
                   <GoVerified className="text-blue-400 text-md" />
                 </p>
                 <p className="capitalize font-medium text-xs text-gray-500 hidden md:block">
