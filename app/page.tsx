@@ -1,10 +1,8 @@
-import Image from "next/image";
-import { Navbar, Sidebar } from "@/components";
+import { ImageCard, Navbar, NoResults, Sidebar } from "@/components";
 import axios from "axios";
 
 const Home = async () => {
   const { data } = await axios.get(`http://localhost:3000/backend/post`);
-
   return (
     <main className="xl:w-[1200px] m-auto overflow-hidden min-h-screen">
       <Navbar />
@@ -13,17 +11,11 @@ const Home = async () => {
           <Sidebar />
         </div>
         <div className="flex flex-col gap-10 images h-full">
-          {data.map((image) => (
-            <div key={image.caption}>
-              <p>{image.caption}</p>
-              <Image
-                src={image.image.asset.url}
-                alt={image.caption}
-                width={200}
-                height={200}
-              />
-            </div>
-          ))}
+          {data.length ? (
+            data.map((post) => <ImageCard key={post._id} post={post} />)
+          ) : (
+            <NoResults text={"No results found"} />
+          )}
         </div>
       </div>
     </main>
