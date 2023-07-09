@@ -19,7 +19,7 @@ a {
   box-sizing: border-box;
 }
 
-.videos::-webkit-scrollbar {
+.images::-webkit-scrollbar {
   width: 0px;
 }
 
