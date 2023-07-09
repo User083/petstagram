@@ -24,11 +24,15 @@ module.exports = {
         ' 50%': '50%',
       },
       backgroundColor: {
-        primary: '#F1F1F2',
+        "primary-bg": '#F1F1F2',
         blur: '#030303',
       },
       colors: {
-        primary: 'rgb(22, 24, 35)',
+        primary: '#FF4365',
+        secondary: "#F0A202",
+        highlight: "#00D9C0",
+        white: "#FFFFF3",
+        black: "#030301"
       },
       height: {
         '88vh': '88vh',

@@ -37,7 +37,7 @@ const Sidebar = () => {
             <div className="px-2 py-4 hidden xl:block">
               <p className="text-gray-400">Log in to like and comment</p>
               <div className="pr-4">
-                <button className="bg-highlight text-lg border-[1px] font-semibold px-6 py-3 rounded-md outline-none w-full mt-3 hover:bg-primary cursor-pointer">
+                <button className="bg-primary text-lg text-white border-[1px] font-semibold px-6 py-3 rounded-md outline-none w-full mt-3 hover:bg-highlight cursor-pointer">
                   Log In
                 </button>
               </div>
