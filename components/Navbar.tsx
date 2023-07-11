@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { cat, createOrGetUser } from "@/utils";
+import { createOrGetUser } from "@/utils";
+import { cat } from "@/utils/icons";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import useAuthStore from "@/store/authStore";
 import { IoMdAdd } from "react-icons/io";

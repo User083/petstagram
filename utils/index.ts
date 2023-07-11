@@ -1,9 +1,5 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import horse from "./horse.png";
-import cat from "./cat.png";
-import bird from "./bird.png";
-import dog from "./dog.png";
 
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -32,5 +28,3 @@ export const createOrGetUser = async (response: any, addUser: any) => {
 
   await axios.post(`${BASE_URL}/backend/users`, user);
 };
-
-export { horse, bird, dog, cat };
