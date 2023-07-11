@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const PostList = ({ posts }) => {
   return (
-    <div>
+    <div className="flex flex-col gap-10 h-full images">
       {posts.length ? (
         posts.map((post) => <ImageCard key={post._id} post={post} />)
       ) : (
@@ -26,12 +26,13 @@ const Feed = () => {
       const response = await fetch("/backend/post");
       const data = await response.json();
       setPosts(data);
+      console.log(data);
     };
     fetchPosts();
   }, []);
 
   return (
-    <section className="feed">
+    <section className="flex flex-col mt-5 gap-10">
       <form className="relative w-full flex-center">
         <input
           className="peer"

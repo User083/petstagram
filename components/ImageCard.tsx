@@ -35,6 +35,7 @@ const ImageCard = ({ post }: IProps) => {
                 <p className="flex items-center md:text-md font-bold text-primary">
                   {post.postedBy.userName}
                   {` `}
+
                   <GoVerified className="text-blue-400 text-md" />
                 </p>
                 <p className="capitalize font-medium text-xs text-gray-500 hidden md:block">
@@ -53,9 +54,9 @@ const ImageCard = ({ post }: IProps) => {
               <Image
                 src={post.image.asset.url}
                 alt="Image Post"
-                width={200}
-                height={200}
-                className="bg-gray-100 cursor-pointer rounded-2xl w-[200px] lg:h-[530px] md:h-[400px] lg:w-[600px] h-[300px]"
+                width={530}
+                height={530}
+                className="bg-gray-100 cursor-pointer rounded-2xl w-[200px] lg:h-[530px] md:h-[400px] lg:w-[600px] h-[300px] object-cover"
               />
             </>
           </Link>

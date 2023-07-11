@@ -2,12 +2,12 @@ import { Image, ImageCrop, Reference } from "sanity";
 
 export interface ImagePost {
   caption: string;
-  image: { asset: { url: string } };
+  image: { asset: { url: string }; hotspot: { height: number; width: number } };
   userId: string;
   postedBy: {
     _id: string;
     userName: string;
-    profilePicture: { asset: { url: string } };
+    profilePicture: string;
   };
   likes: null;
   comments: null;

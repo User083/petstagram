@@ -29,7 +29,7 @@ const Navbar = () => {
         </div>
       </Link>
       {session?.user ? (
-        <>
+        <div className="flex gap-2">
           <Link href="/profile">
             <Image
               className="cursor-pointer rounded-full"
@@ -41,13 +41,14 @@ const Navbar = () => {
           </Link>
           <button
             type="button"
+            className="rounded-full border-primary text-primary font-semibold border-[1px] px-2 hover:border-highlight hover:text-highlight"
             onClick={() => {
               signOut();
             }}
           >
             Sign Out
           </button>
-        </>
+        </div>
       ) : (
         <>
           {provider && (

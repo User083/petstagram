@@ -2,7 +2,7 @@ interface IProps {
   text: string;
 }
 const NoResults = ({ text }: IProps) => {
-  return <div>NoResults</div>;
+  return <div>{text}</div>;
 };
 
 export default NoResults;

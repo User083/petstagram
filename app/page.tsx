@@ -2,7 +2,7 @@ import { Feed } from "@/components";
 
 const Home = () => {
   return (
-    <section className="">
+    <section className="w-full flex items-center justify-center">
       <Feed />
     </section>
   );

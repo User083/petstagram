@@ -40,20 +40,30 @@ const Sidebar = () => {
             </div>
 
             {session?.user ? (
-              <div className="py-2 px-2 w-full flex gap-2 items-center flex-wrap">
-                <Link href="/profile">
-                  <Image
-                    className="cursor-pointer rounded-full"
-                    src={cat}
-                    alt="Profile Picture"
-                    width={37}
-                    height={37}
-                  />
-                </Link>
-                <p className="text-gray-400 text-sm">
-                  Signed In as{" "}
-                  <span className="text-primary">{session.user.name}</span>
-                </p>
+              <div className="flex justify-between items-center">
+                <div className="py-2 px-2 w-full flex gap-2 items-center flex-wrap">
+                  <Link href="/profile">
+                    <Image
+                      className="cursor-pointer rounded-full"
+                      src={session.user.image}
+                      alt="Profile Picture"
+                      width={37}
+                      height={37}
+                    />
+                  </Link>
+                  <p className="text-gray-400 text-sm">
+                    <span className="text-primary">{session.user.name}</span>
+                  </p>
+                </div>
+                <button
+                  className="rounded-full border-primary text-primary font-semibold border-[1px] px-2 hover:border-highlight hover:text-highlight xl:flex w-full justify-center hidden"
+                  type="button"
+                  onClick={() => {
+                    signOut();
+                  }}
+                >
+                  Sign out
+                </button>
               </div>
             ) : (
               <div className="px-2 py-4 hidden xl:block">
