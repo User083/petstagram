@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { cat } from "@/utils";
+import { cat } from "@/utils/icons";
 
 const Navbar = () => {
   return (

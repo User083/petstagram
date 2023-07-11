@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { pets } from "@/utils/constants";
+import { topics } from "@/utils/constants";
 import { useSearchParams } from "next/navigation";
 
 const Discover = () => {
@@ -17,22 +17,22 @@ const Discover = () => {
         Pets
       </p>
       <div className="flex gap-3 flex-wrap">
-        {pets.map((petType) => (
-          <Link href={`/?pet=${petType.name}`} key={petType.name}>
+        {topics.map((topic) => (
+          <Link href={`/?pet=${topic.name}`} key={topic.name}>
             <div
               className={
-                searhParams.get("pet") === petType.name
+                searhParams.get("pet") === topic.name
                   ? activePetStyle
                   : petStyle
               }
             >
               <span className="font-bold text-2xl xl:text-md h-[20px] w-[20px]">
-                {petType.icon}
+                {topic.icon}
               </span>
               <span
                 className={`font-medium text-md hidden xl:block capitalize`}
               >
-                {petType.name}
+                {topic.name}
               </span>
             </div>
           </Link>

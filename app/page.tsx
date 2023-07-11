@@ -1,8 +1,6 @@
-import { ImageCard, Navbar, NoResults, Sidebar } from "@/components";
-import axios from "axios";
+import { Navbar, Feed, Sidebar } from "@/components";
 
-const Home = async () => {
-  const { data } = await axios.get(`http://localhost:3000/backend/post`);
+const Home = () => {
   return (
     <main className="xl:w-[1200px] m-auto overflow-hidden min-h-screen">
       <Navbar />
@@ -11,11 +9,7 @@ const Home = async () => {
           <Sidebar />
         </div>
         <div className="flex flex-col gap-10 images h-full">
-          {data.length ? (
-            data.map((post) => <ImageCard key={post._id} post={post} />)
-          ) : (
-            <NoResults text={"No results found"} />
-          )}
+          <Feed />
         </div>
       </div>
     </main>
