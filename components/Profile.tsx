@@ -3,7 +3,7 @@ const Profile = ({ name, desc, data }) => {
   return (
     <section className="w-full">
       <h1 className="">
-        <span>{name} Profile</span>
+        <span>{name}'s Profile</span>
       </h1>
       <p>{desc}</p>
       <div>

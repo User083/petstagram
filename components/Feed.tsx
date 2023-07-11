@@ -3,7 +3,10 @@ import { ImageCard, NoResults } from "@/components";
 import { ImagePost } from "@types/types";
 import { useEffect, useState } from "react";
 
-const PostList = ({ posts }) => {
+interface IProps {
+  posts: ImagePost[];
+}
+const PostList = ({ posts }: IProps) => {
   return (
     <div className="flex flex-col gap-10 h-full images">
       {posts.length ? (
@@ -20,14 +23,14 @@ const Feed = () => {
   const [searchText, setSearchText] = useState("");
 
   const handleSearchChange = (e) => {};
+  const fetchPosts = async () => {
+    const response = await fetch("/backend/post");
+    const data = await response.json();
+    setPosts(data);
+    console.log(data);
+  };
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch("/backend/post");
-      const data = await response.json();
-      setPosts(data);
-      console.log(data);
-    };
     fetchPosts();
   }, []);
 
