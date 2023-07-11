@@ -6,9 +6,9 @@ import { useSearchParams } from "next/navigation";
 const Discover = () => {
   const searhParams = useSearchParams();
 
-  const activeTopicStyle =
+  const activePetStyle =
     "xl:border-2 hover:bg-primary xl:border-primary px-3 py-2 rounded xl:rounded-full flex items-center gap-2 justify-center cursor-pointer text-secondary";
-  const topicStyle =
+  const petStyle =
     "xl:border-2 hover:bg-primary xl:border-gray-300 px-3 py-2 rounded xl:rounded-full flex items-center gap-2 justify-center cursor-pointer text-black";
 
   return (
@@ -18,12 +18,12 @@ const Discover = () => {
       </p>
       <div className="flex gap-3 flex-wrap">
         {topics.map((topic) => (
-          <Link href={`/?topic=${topic.name}`} key={topic.name}>
+          <Link href={`/?pet=${topic.name}`} key={topic.name}>
             <div
               className={
-                searhParams.get("topic") === topic.name
-                  ? activeTopicStyle
-                  : topicStyle
+                searhParams.get("pet") === topic.name
+                  ? activePetStyle
+                  : petStyle
               }
             >
               <span className="font-bold text-2xl xl:text-md h-[20px] w-[20px]">

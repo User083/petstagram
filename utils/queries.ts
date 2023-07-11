@@ -88,8 +88,18 @@ likes,
   return query;
 };
 
+export const singlePostQuery = (postId: string | string[]) => {
+  const query = `*[_type == "post" && _id == '${postId}']`;
+
+  return query;
+};
 export const singleUserQuery = (userId: string | string[]) => {
   const query = `*[_type == "user" && _id == '${userId}']`;
+
+  return query;
+};
+export const userByEmail = (email: string | string[]) => {
+  const query = `*[_type == "user" && email == "${email}"]`;
 
   return query;
 };

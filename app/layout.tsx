@@ -1,19 +1,32 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { Navbar, Sidebar } from "@components";
+import Provider from "@components/Provider";
 
 export const metadata: Metadata = {
   title: "Petstagram",
   description: "The content you really want.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Provider>
+          <div></div>
+          <main className="app xl:w-[1200px] m-auto overflow-hidden min-h-screen">
+            <Navbar />
+            <div className="flex gap-6 md:gap-20">
+              <div className="min-h-screen h-full overflow-hidden xl:hover:overflow-auto">
+                <Sidebar />
+              </div>
+              <div className="w-full">{children}</div>
+            </div>
+          </main>
+        </Provider>
+      </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
