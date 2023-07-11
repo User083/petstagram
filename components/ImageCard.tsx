@@ -2,15 +2,16 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ImagePost } from "@/types";
+import { ImagePost } from "@types/types";
 import { NextPage } from "next";
 import { GoVerified } from "react-icons/go";
+import { useRouter, usePathname } from "next/navigation";
 
 interface IProps {
   post: ImagePost;
 }
 
-const ImageCard: NextPage<IProps> = ({ post }) => {
+const ImageCard = ({ post }: IProps) => {
   return (
     <div className="flex flex-col border-b-2 border-gray-200 pb-6">
       <div>
@@ -18,12 +19,13 @@ const ImageCard: NextPage<IProps> = ({ post }) => {
           <div className="md:w-16 md:h-16 w-10 h-10">
             <Link href="/">
               <>
-                <Image
-                  src={post.postedBy.profilePicture.asset.url}
+                {/* <Image
+                  src={post.postedBy.profilePicture}
                   alt="Profile Photo"
                   width={62}
                   height={62}
-                />
+                  className="object-contain rounded-full"
+                /> */}
               </>
             </Link>
           </div>

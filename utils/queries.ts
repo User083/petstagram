@@ -98,6 +98,11 @@ export const singleUserQuery = (userId: string | string[]) => {
 
   return query;
 };
+export const userByEmail = (email: string | string[]) => {
+  const query = `*[_type == "user" && email == "${email}"]`;
+
+  return query;
+};
 
 export const allUsersQuery = () => {
   const query = `*[_type == "user"]`;

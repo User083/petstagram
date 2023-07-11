@@ -18,5 +18,5 @@ export interface IUser {
   _id: string;
   _type: string;
   userName: string;
-  profilePicture: { asset: { url: string } };
+  profilePicture: string;
 }

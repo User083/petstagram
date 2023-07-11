@@ -1,15 +1,18 @@
 "use client";
-import { NextPage } from "next";
 import Link from "next/link";
 import { AiFillHome, AiOutlineMenu } from "react-icons/ai";
 import { ImCancelCircle } from "react-icons/im";
 import { useState } from "react";
 import SidebarFooter from "./SidebarFooter";
 import Discover from "./Discover";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import Image from "next/image";
+import { cat } from "@utils/icons";
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
+  const { data: session } = useSession();
   const normalLink =
     "flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer fonte-semibold rounded";
   return (
@@ -35,7 +38,24 @@ const Sidebar = () => {
                 </div>
               </Link>
             </div>
-            {!loggedIn && (
+
+            {session?.user ? (
+              <div className="py-2 px-2 w-full flex gap-2 items-center flex-wrap">
+                <Link href="/profile">
+                  <Image
+                    className="cursor-pointer rounded-full"
+                    src={cat}
+                    alt="Profile Picture"
+                    width={37}
+                    height={37}
+                  />
+                </Link>
+                <p className="text-gray-400 text-sm">
+                  Signed In as{" "}
+                  <span className="text-primary">{session.user.name}</span>
+                </p>
+              </div>
+            ) : (
               <div className="px-2 py-4 hidden xl:block">
                 <p className="text-gray-400">Log in to like and comment</p>
                 <div className="pr-4">

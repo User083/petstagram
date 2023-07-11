@@ -1,22 +1,9 @@
 "use client";
 import { ImageCard, NoResults } from "@/components";
-import { ImagePost } from "@/types";
-import axios from "axios";
+import { ImagePost } from "@types/types";
 import { useEffect, useState } from "react";
 
-interface IProps {
-  data: ImagePost[];
-}
-
-const Feed = () => {
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await axios.get(`http://localhost:3000/backend/post`);
-      setPosts(data);
-    };
-    fetchPosts();
-  }, []);
+const PostList = ({ posts }) => {
   return (
     <div>
       {posts.length ? (
@@ -25,6 +12,37 @@ const Feed = () => {
         <NoResults text={"No results found"} />
       )}
     </div>
+  );
+};
+
+const Feed = () => {
+  const [posts, setPosts] = useState([]);
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearchChange = (e) => {};
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch("/backend/post");
+      const data = await response.json();
+      setPosts(data);
+    };
+    fetchPosts();
+  }, []);
+
+  return (
+    <section className="feed">
+      <form className="relative w-full flex-center">
+        <input
+          className="peer"
+          type="text"
+          value={searchText}
+          placeholder="Search posts"
+          onChange={handleSearchChange}
+        />
+      </form>
+      <PostList posts={posts} />
+    </section>
   );
 };
 
