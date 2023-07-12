@@ -1,4 +1,4 @@
-import { Image, ImageCrop, Reference } from "sanity";
+import { DatetimeDefinition, Image, ImageCrop, Reference } from "sanity";
 
 export interface ImagePost {
   caption: string;
@@ -10,8 +10,10 @@ export interface ImagePost {
     profilePicture: string;
   };
   likes: Array;
-  comments: [postedBy: Reference, comment: string];
+  comments: Array;
   _id: string;
+  topic: string;
+  uploaded: string;
 }
 
 export interface IUser {

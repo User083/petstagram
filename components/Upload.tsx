@@ -47,6 +47,7 @@ const Upload = () => {
       setSavingPost(true);
       const document = {
         _type: "post",
+        uploaded: asset._createdAt.toString(),
         caption,
         image: {
           _type: "image",
@@ -61,6 +62,8 @@ const Upload = () => {
           _ref: session?.user._id,
         },
         topic: category,
+        likes: [],
+        comments: [],
       };
       try {
         setSavingPost(true);
@@ -173,6 +176,8 @@ const Upload = () => {
             <button
               onClick={() => {
                 setAsset(undefined);
+                setCaption("");
+                setCategory(topics[0].name);
               }}
               type="button"
               className="border-gray-300 p-2 rounded lg:w-44 outline-none w-28 border-2 hover:border-primary"

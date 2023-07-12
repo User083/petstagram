@@ -2,7 +2,6 @@ export default {
   name: "post",
   title: "Post",
   type: "document",
-  createdAt: "string",
   fields: [
     {
       name: "caption",
@@ -49,6 +48,11 @@ export default {
     {
       name: "topic",
       title: "Topic",
+      type: "string",
+    },
+    {
+      name: "created",
+      title: "Uploaded",
       type: "string",
     },
   ],

@@ -1,6 +1,7 @@
 export const allPostsQuery = () => {
   const query = `*[_type == "post"] | order(_createdAt desc){
     _id,
+    _createdAt,
      caption,
        image{
         asset->{
@@ -23,7 +24,9 @@ export const allPostsQuery = () => {
       userName,
       profilePicture
     },
-    }
+    },
+    topic,
+    uploaded,
   }`;
 
   return query;
