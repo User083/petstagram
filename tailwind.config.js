@@ -31,7 +31,7 @@ module.exports = {
         primary: '#FF4365',
         secondary: "#F0A202",
         highlight: "#00D9C0",
-        white: "#FFFFF3",
+        white: "#FFFFFF",
         black: "#030301"
       },
       height: {

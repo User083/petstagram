@@ -71,6 +71,12 @@ const Sidebar = () => {
                     <span className="text-primary">{session.user.name}</span>
                   </p>
                 </div>
+                <Link
+                  className="rounded-full border-primary text-primary font-semibold border-[1px] px-2 hover:border-highlight hover:text-highlight xl:flex w-full justify-center hidden"
+                  href="/upload"
+                >
+                  Upload
+                </Link>
                 <button
                   className="rounded-full border-primary text-primary font-semibold border-[1px] px-2 hover:border-highlight hover:text-highlight xl:flex w-full justify-center hidden"
                   type="button"

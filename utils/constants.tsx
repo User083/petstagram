@@ -1,37 +1,41 @@
-import Image from "next/image";
-import { cat, horse, dog, bird, hamster, fish, snake, rabbit } from "./icons";
+import {
+  GiRat,
+  GiSandSnake,
+  GiSittingDog,
+  GiCat,
+  GiDoubleFish,
+  GiHorseHead,
+  GiHummingbird,
+} from "react-icons/gi";
 
 export const topics = [
   {
     name: "dogs",
-    icon: <Image src={dog} alt="icon" width={20} height={20} />,
+    icon: <GiSittingDog />,
   },
   {
     name: "cats",
-    icon: <Image src={cat} alt="icon" width={20} height={20} />,
+    icon: <GiCat />,
   },
   {
     name: "birds",
-    icon: <Image src={bird} alt="icon" width={20} height={20} />,
+    icon: <GiHummingbird />,
   },
   {
     name: "horses",
-    icon: <Image src={horse} alt="icon" width={20} height={20} />,
+    icon: <GiHorseHead />,
   },
   {
-    name: "hamsters",
-    icon: <Image src={hamster} alt="icon" width={20} height={20} />,
+    name: "rodents",
+    icon: <GiRat />,
   },
+
   {
-    name: "rabbits",
-    icon: <Image src={rabbit} alt="icon" width={20} height={20} />,
-  },
-  {
-    name: "fish",
-    icon: <Image src={fish} alt="icon" width={20} height={20} />,
+    name: "water",
+    icon: <GiDoubleFish />,
   },
   {
     name: "reptiles",
-    icon: <Image src={snake} alt="icon" width={20} height={20} />,
+    icon: <GiSandSnake />,
   },
 ];

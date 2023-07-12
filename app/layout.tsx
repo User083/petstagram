@@ -16,10 +16,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <div></div>
           <main className="app xl:w-[1200px] m-auto overflow-hidden min-h-screen">
             <div className="flex gap-6 md:gap-20">
-              <div className="min-h-screen h-full overflow-hidden xl:hover:overflow-auto">
+              <div className="min-h-screen h-full overflow-hidden xl:hover:overflow-auto z-10 bg-white">
                 <Sidebar />
               </div>
-              <div className="w-full">{children}</div>
+              <div className="w-full z-0">{children}</div>
             </div>
           </main>
         </Provider>

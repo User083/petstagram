@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ImagePost } from "@types/types";
-import { GoVerified } from "react-icons/go";
+import { MdVerified } from "react-icons/md";
 import { IoHeartOutline, IoHeart, IoChatbubbleOutline } from "react-icons/io5";
 import { useState, useEffect } from "react";
 
@@ -44,14 +44,15 @@ const ImageCard = ({ post }: IProps) => {
           <div>
             <Link href="/">
               <div className="flex items-center gap-2">
-                <p className="flex items-center md:text-md font-bold text-primary">
-                  {post.postedBy.userName}
-                  {` `}
+                <div className="flex items-center gap-1">
+                  <p className="flex items-center md:text-md font-bold text-primary">
+                    {post.postedBy.userName}
+                  </p>
+                  <MdVerified className="text-blue-400 text-md" />
+                </div>
 
-                  <GoVerified className="text-blue-400 text-md" />
-                </p>
                 <p className="capitalize font-medium text-xs text-gray-500 hidden md:block">
-                  {post.postedBy.userName}
+                  {post.caption}
                 </p>
               </div>
             </Link>
