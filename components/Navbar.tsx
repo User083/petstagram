@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { cat } from "@/utils/icons";
+import { logoW } from "@/utils/icons";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useEffect, useState } from "react";
 const Navbar = () => {
@@ -16,12 +16,12 @@ const Navbar = () => {
     fetchProviders();
   }, []);
   return (
-    <nav className="w-full flex justify-between items-center border-b-2 py-2 px-4">
+    <nav className="w-full flex justify-between items-center border-b-2 py-2 px-4 bg-black">
       <Link href="/">
         <div className="w-[100px] md:w-[130px] h-[38px]">
           <Image
             className="cursor-pointer"
-            src={cat}
+            src={logoW}
             alt="Logo"
             width={37}
             height={37}

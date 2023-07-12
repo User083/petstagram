@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Navbar, Sidebar } from "@components";
+import { Sidebar } from "@components";
 import Provider from "@components/Provider";
 
 export const metadata: Metadata = {
@@ -15,7 +15,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Provider>
           <div></div>
           <main className="app xl:w-[1200px] m-auto overflow-hidden min-h-screen">
-            <Navbar />
             <div className="flex gap-6 md:gap-20">
               <div className="min-h-screen h-full overflow-hidden xl:hover:overflow-auto">
                 <Sidebar />

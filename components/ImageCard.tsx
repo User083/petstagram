@@ -1,23 +1,35 @@
 "use client";
-import { useState, useEffect } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ImagePost } from "@types/types";
-import { NextPage } from "next";
 import { GoVerified } from "react-icons/go";
-import { useRouter, usePathname } from "next/navigation";
+import { IoHeartOutline, IoHeart, IoChatbubbleOutline } from "react-icons/io5";
+import { useState, useEffect } from "react";
 
 interface IProps {
   post: ImagePost;
 }
 
 const ImageCard = ({ post }: IProps) => {
+  const [liked, setLiked] = useState(false);
+  const [likes, setLikes] = useState(0);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    if (post.comments != null) {
+      setComments(post.comments.length);
+    }
+    if (post.likes != null) {
+      setLikes(post.likes.length);
+    }
+  }, []);
   return (
     <div className="flex flex-col border-b-2 border-gray-200 pb-6">
       <div>
         <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded">
           <div className="md:w-16 md:h-16 w-10 h-10">
-            <Link href="/">
+            <Link href="/profile">
               <>
                 {/* <Image
                   src={post.postedBy.profilePicture}
@@ -60,6 +72,49 @@ const ImageCard = ({ post }: IProps) => {
               />
             </>
           </Link>
+          <div className="flex flex-col gap-1 px-2 py-2">
+            <div className="flex gap-2 py-2">
+              {liked ? (
+                <IoHeart
+                  className="text-primary cursor-pointer text-2xl"
+                  onClick={() => {
+                    setLiked((prev) => !prev);
+                    setLikes((prev) => prev - 1);
+                  }}
+                />
+              ) : (
+                <IoHeartOutline
+                  className="hover:text-primary cursor-pointer text-2xl"
+                  onClick={() => {
+                    setLiked((prev) => !prev);
+                    setLikes((prev) => prev + 1);
+                  }}
+                />
+              )}
+
+              <IoChatbubbleOutline
+                className="hover:text-gray-400 cursor-pointer text-2xl"
+                onClick={() => {}}
+              />
+            </div>
+            <p className="font-semibold px-2 text-sm">{likes} likes</p>
+            <p className=" px-2 text-sm">
+              <span className="font-semibold">{post.postedBy.userName}</span>{" "}
+              {post.caption}
+            </p>
+            {comments.length > 0 ? (
+              <button className="flex px-2 py-1">
+                {" "}
+                <p className="text-sm text-gray-400">
+                  View all {comments.length} comments
+                </p>
+              </button>
+            ) : (
+              <p className=" px-2 py-1 text-sm text-gray-400">
+                No comments yet
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>

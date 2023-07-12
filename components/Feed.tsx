@@ -2,6 +2,7 @@
 import { ImageCard, NoResults } from "@/components";
 import { ImagePost } from "@types/types";
 import { useEffect, useState } from "react";
+import { IoSearchOutline } from "react-icons/io5";
 
 interface IProps {
   posts: ImagePost[];
@@ -36,9 +37,10 @@ const Feed = () => {
 
   return (
     <section className="flex flex-col mt-5 gap-10">
-      <form className="relative w-full flex-center">
+      <form className="w-full px-3 flex gap-3 items-center">
+        <IoSearchOutline className="text-3xl text-gray-400" />
         <input
-          className="peer"
+          className="peer ring rounded ring-gray-200 border-gray-200 px-2 py-2 focus:ring-primary focus:border-primary"
           type="text"
           value={searchText}
           placeholder="Search posts"
