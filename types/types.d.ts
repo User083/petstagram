@@ -2,6 +2,7 @@ import { DatetimeDefinition, Image, ImageCrop, Reference } from "sanity";
 
 export interface ImagePost {
   caption: string;
+  _createdAt: string;
   image: { asset: { url: string }; hotspot: { height: number; width: number } };
   userId: string;
   postedBy: {
