@@ -1,4 +1,5 @@
 export default {
+  _id: "string",
   name: "user",
   title: "User",
   type: "document",
@@ -9,7 +10,7 @@ export default {
       type: "string",
     },
     {
-      name: "image",
+      name: "profilePicture",
       title: "Profile Picture",
       type: "string",
     },
@@ -17,6 +18,11 @@ export default {
       name: "email",
       title: "Email",
       type: "email",
+    },
+    {
+      name: "id",
+      title: "userID",
+      type: "string",
     },
   ],
 };

@@ -3,20 +3,32 @@ import { useState, useEffect } from "react";
 import { client } from "@utils/client";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { SanityAssetDocument } from "next-sanity";
+import { SanityImageAssetDocument } from "next-sanity";
 import Image from "next/image";
 import { topics } from "@utils/constants";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Upload = () => {
+  const { data: session, update } = useSession();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [asset, setAsset] = useState<SanityAssetDocument | undefined>();
   const [wrongFileType, setWrongFileType] = useState(false);
+  const [caption, setCaption] = useState("");
+  const [category, setCategory] = useState(topics[0].name);
+  const [savingPost, setSavingPost] = useState(false);
+  useEffect(() => {
+    update();
+  }, []);
 
   const uploadImage = async (e: any) => {
     const selectedFile = e.target.files[0];
-    const fileTypes = ["image/jpg", "image/png"];
+    const fileTypes = ["image/jpeg", "image/png", "image/jpg"];
     if (fileTypes.includes(selectedFile.type)) {
+      setIsLoading(true);
       client.assets
-        .upload("file", selectedFile, {
+        .upload("image", selectedFile, {
           contentType: selectedFile.type,
           filename: selectedFile.name,
         })
@@ -27,6 +39,43 @@ const Upload = () => {
     } else {
       setIsLoading(false);
       setWrongFileType(true);
+    }
+  };
+
+  const handlePost = async () => {
+    if (caption && asset?._id && category && session?.user) {
+      setSavingPost(true);
+      const document = {
+        _type: "post",
+        caption,
+        image: {
+          _type: "image",
+          asset: {
+            _type: "reference",
+            _ref: asset?._id,
+          },
+        },
+        userId: session?.user._id,
+        postedBy: {
+          _type: "postedBy",
+          _ref: session?.user._id,
+        },
+        topic: category,
+      };
+      try {
+        setSavingPost(true);
+        await fetch("/backend/post", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(document),
+        }).then((res) =>
+          res.ok ? router.push("/") : console.log("Failed to upload")
+        );
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setSavingPost(false);
+      }
     }
   };
   return (
@@ -47,6 +96,7 @@ const Upload = () => {
                       alt="Uploaded Image"
                       className="mt-16 bg-black rounded-xl"
                       height={450}
+                      width={300}
                     />
                   </div>
                 ) : (
@@ -89,13 +139,17 @@ const Upload = () => {
           <label className="text-md font-medium">Caption</label>
           <input
             type="text"
-            value=""
-            onChange={() => {}}
+            value={caption}
+            onChange={(e) => {
+              setCaption(e.target.value);
+            }}
             className="rounded outline-non text-md border-2 border-gray-200 p-2 focus:border-primary focus:ring-primary"
           />
           <label className="text-md font-medium">Select a category</label>
           <select
-            onChange={() => {}}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
             className="lg:p-4 outline-none border-2 border-gray-200 capitalize p-2 cursor-pointer rounded focus:border-primary focus:ring-primary"
           >
             {topics.map((topic) => (
@@ -110,14 +164,16 @@ const Upload = () => {
           </select>
           <div className="flex gap-6 mt-10">
             <button
-              onClick={() => {}}
+              onClick={handlePost}
               type="button"
               className=" p-2 rounded lg:w-44 outline-none w-28 bg-primary text-white"
             >
               Upload
             </button>
             <button
-              onClick={() => {}}
+              onClick={() => {
+                setAsset(undefined);
+              }}
               type="button"
               className="border-gray-300 p-2 rounded lg:w-44 outline-none w-28 border-2 hover:border-primary"
             >

@@ -14,7 +14,7 @@ interface IProps {
 const ImageCard = ({ post }: IProps) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<any[] | null>([]);
 
   useEffect(() => {
     if (post.comments != null) {
@@ -27,17 +27,17 @@ const ImageCard = ({ post }: IProps) => {
   return (
     <div className="flex flex-col border-b-2 border-gray-200 pb-6">
       <div>
-        <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded">
+        <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded items-center">
           <div className="md:w-16 md:h-16 w-10 h-10">
             <Link href="/profile">
               <>
-                {/* <Image
+                <Image
                   src={post.postedBy.profilePicture}
                   alt="Profile Photo"
-                  width={62}
-                  height={62}
+                  width={60}
+                  height={60}
                   className="object-contain rounded-full"
-                /> */}
+                />
               </>
             </Link>
           </div>

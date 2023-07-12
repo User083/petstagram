@@ -11,17 +11,22 @@ const handler = NextAuth({
   ],
   secret: process.env.SECRET,
   callbacks: {
-    async session({ session }) {
+    async session({ session, user, token }) {
+      session.user._id = token.sub;
+
       return session;
     },
     async signIn({ user, profile }) {
       try {
-        const { name, image, email, id } = user;
+        const { name, image, email } = user;
+        const { sub } = profile;
+
         const newUser = {
-          _id: id,
+          _id: sub,
           _type: "user",
+          id: sub,
           userName: name,
-          image: image,
+          profilePicture: image,
           email: email,
         };
 

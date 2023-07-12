@@ -11,10 +11,3 @@ export const GET = async (request: Request) => {
     return new Response("Failed to retrieve all users", { status: 500 });
   }
 };
-
-export const POST = async (request: Request) => {
-  const data = request.body;
-  console.log(data, "POST DATA");
-
-  return new Response("Successful creation", { status: 200 });
-};

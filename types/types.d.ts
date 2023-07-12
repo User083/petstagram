@@ -9,8 +9,8 @@ export interface ImagePost {
     userName: string;
     profilePicture: string;
   };
-  likes: null;
-  comments: null;
+  likes: Array;
+  comments: [postedBy: Reference, comment: string];
   _id: string;
 }
 
@@ -19,4 +19,5 @@ export interface IUser {
   _type: string;
   userName: string;
   profilePicture: string;
+  email: string;
 }

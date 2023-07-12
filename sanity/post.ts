@@ -21,6 +21,8 @@ export default {
       name: "userId",
       title: "UserId",
       type: "string",
+      validation: (Rule) =>
+        Rule.required().min(1).warning("You need to be logged in to post"),
     },
     {
       name: "postedBy",
