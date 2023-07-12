@@ -14,7 +14,7 @@ const Users = () => {
     getUsers();
   }, []);
   return (
-    <div className="flex xl:w-[30%] w-full mt-10">
+    <div className="hidden xl:flex xl:w-[30%] w-full mt-10">
       <div className="flex flex-col gap-5">
         <h1 className="title font-bold text-xl">Users</h1>
         <div className="flex gap-2">
