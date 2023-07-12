@@ -1,4 +1,5 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Sofia&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,6 +9,7 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 a {
@@ -17,6 +19,10 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.title {
+  font-family: 'Sofia', cursive;
 }
 
 .images::-webkit-scrollbar {
