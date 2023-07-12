@@ -3,6 +3,7 @@ import { ImageCard, NoResults } from "@/components";
 import { ImagePost } from "@types/types";
 import { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
+import { BiLoaderAlt } from "react-icons/bi";
 
 interface IProps {
   posts: ImagePost[];
@@ -22,13 +23,18 @@ const PostList = ({ posts }: IProps) => {
 const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSearchChange = (e) => {};
   const fetchPosts = async () => {
+    setLoading(true);
     const response = await fetch("/backend/post");
-    const data = await response.json();
-    setPosts(data);
-    console.log(data);
+    await response
+      .json()
+      .then((data) => {
+        setPosts(data);
+      })
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -47,7 +53,13 @@ const Feed = () => {
           onChange={handleSearchChange}
         />
       </form>
-      <PostList posts={posts} />
+      {loading ? (
+        <p className="animate-pulse  title">
+          <BiLoaderAlt className="animate-spin text-6xl text-primary" />
+        </p>
+      ) : (
+        <PostList posts={posts} />
+      )}
     </section>
   );
 };

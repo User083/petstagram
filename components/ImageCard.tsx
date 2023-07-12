@@ -68,9 +68,9 @@ const ImageCard = ({ post }: IProps) => {
               <Image
                 src={post.image.asset.url}
                 alt="Image Post"
-                width={530}
-                height={530}
-                className="bg-gray-100 cursor-pointer rounded-2xl w-[250px] md:w-[400px] lg:h-[530px] md:h-[400px] lg:w-[600px] h-[300px] object-cover"
+                width={600}
+                height={600}
+                className="bg-gray-100 cursor-pointer rounded w-[250px] md:w-[400px] lg:h-[800px] md:h-[600px] lg:w-[600px] h-[300px] object-cover"
               />
             </>
           </Link>
