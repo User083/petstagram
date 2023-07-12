@@ -108,7 +108,11 @@ export const userByEmail = (email: string | string[]) => {
 };
 
 export const allUsersQuery = () => {
-  const query = `*[_type == "user"]`;
+  const query = `*[_type == 'user']{
+    _id,
+     userName,
+      profilePicture,
+  }`;
 
   return query;
 };

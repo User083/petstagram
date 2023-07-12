@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Sidebar } from "@components";
+import { Sidebar, Users } from "@components";
 import Provider from "@components/Provider";
 
 export const metadata: Metadata = {
@@ -13,13 +13,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="en">
       <body>
         <Provider>
-          <div></div>
           <main className="app xl:w-[1200px] m-auto overflow-hidden min-h-screen">
-            <div className="flex gap-6 md:gap-20">
+            <div className="flex">
               <div className="min-h-screen h-full overflow-hidden xl:hover:overflow-auto z-10 bg-white">
                 <Sidebar />
               </div>
               <div className="w-full z-0">{children}</div>
+              <Users />
             </div>
           </main>
         </Provider>

@@ -6,6 +6,7 @@ import NoResults from "./NoResults";
 import Feed from "./Feed";
 import Profile from "./Profile";
 import Upload from "./Upload";
+import Users from "./Users";
 
 export {
   Navbar,
@@ -16,4 +17,5 @@ export {
   Feed,
   Profile,
   Upload,
+  Users,
 };

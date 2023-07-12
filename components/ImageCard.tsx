@@ -70,7 +70,7 @@ const ImageCard = ({ post }: IProps) => {
                 alt="Image Post"
                 width={530}
                 height={530}
-                className="bg-gray-100 cursor-pointer rounded-2xl w-[200px] lg:h-[530px] md:h-[400px] lg:w-[600px] h-[300px] object-cover"
+                className="bg-gray-100 cursor-pointer rounded-2xl w-[250px] lg:h-[530px] md:h-[400px] lg:w-[600px] h-[300px] object-cover"
               />
             </>
           </Link>

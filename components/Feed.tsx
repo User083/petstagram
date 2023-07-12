@@ -37,7 +37,7 @@ const Feed = () => {
 
   return (
     <section className="flex flex-col mt-5 gap-10">
-      <form className="w-full px-3 flex gap-3 items-center">
+      <form className="w-full flex gap-3 items-center">
         <IoSearchOutline className="text-3xl text-gray-400" />
         <input
           className="peer ring rounded ring-gray-200 border-gray-200 px-2 py-2 focus:ring-primary focus:border-primary"

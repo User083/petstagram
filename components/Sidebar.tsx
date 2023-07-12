@@ -21,7 +21,7 @@ const Sidebar = () => {
     fetchProviders();
   }, []);
   const normalLink =
-    "flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer fonte-semibold rounded";
+    "flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold rounded";
   return (
     <div>
       <div
@@ -36,9 +36,9 @@ const Sidebar = () => {
         <div className="xl:w-400 w-20 flex flex-col justify-between mb-10 border-r-2 xl:border-0 p-3 min-h-screen">
           <div>
             <Link href="/">
-              <div className="flex w-full items-center justify-center">
+              <div className="flex w-full items-center justify-center py-1">
                 <>
-                  <Image src={logoB} alt="" height={100} width={100} />
+                  <Image src={logoB} alt="Logo" height={100} width={100} />
                 </>
               </div>
             </Link>
@@ -56,36 +56,38 @@ const Sidebar = () => {
             </div>
 
             {session?.user ? (
-              <div className="flex justify-between items-center">
-                <div className="py-2 px-2 w-full flex gap-2 items-center flex-wrap">
+              <div className="">
+                <div className="xl:flex items-center gap-3 xl:py-3">
                   <Link href="/profile">
                     <Image
-                      className="cursor-pointer rounded-full"
+                      className="cursor-pointer rounded-full ml-2 xl:ml-0 border-[1px] border-primary"
                       src={session.user.image}
                       alt="Profile Picture"
                       width={37}
                       height={37}
                     />
                   </Link>
-                  <p className="text-gray-400 text-sm">
-                    <span className="text-primary">{session.user.name}</span>
+                  <p className="text-gray-400 text-sm hidden xl:flex">
+                    <span className="text-primary ">{session.user.name}</span>
                   </p>
                 </div>
-                <Link
-                  className="rounded-full border-primary text-primary font-semibold border-[1px] px-2 hover:border-highlight hover:text-highlight xl:flex w-full justify-center hidden"
-                  href="/upload"
-                >
-                  Upload
-                </Link>
-                <button
-                  className="rounded-full border-primary text-primary font-semibold border-[1px] px-2 hover:border-highlight hover:text-highlight xl:flex w-full justify-center hidden"
-                  type="button"
-                  onClick={() => {
-                    signOut();
-                  }}
-                >
-                  Sign out
-                </button>
+                <div className="flex gap-3 w-full">
+                  <Link
+                    className="rounded-full bg-primary border-white text-white font-semibold border-[1px] px-2 hover:border-primary hover:bg-white hover:text-primary xl:flex w-full justify-center hidden"
+                    href="/upload"
+                  >
+                    Upload
+                  </Link>
+                  <button
+                    className="rounded-full border-gray-400 text-gray-400 text-sm border-[1px] px-2 hover:border-primary hover:text-primary xl:flex w-full justify-center items-center hidden"
+                    type="button"
+                    onClick={() => {
+                      signOut();
+                    }}
+                  >
+                    Sign out
+                  </button>
+                </div>
               </div>
             ) : (
               <>
