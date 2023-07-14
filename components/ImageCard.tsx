@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ImagePost } from "@types/types";
+import { ImagePost } from "@types";
 import { MdVerified } from "react-icons/md";
 import { IoHeartOutline, IoHeart, IoChatbubbleOutline } from "react-icons/io5";
 import { useState, useEffect } from "react";

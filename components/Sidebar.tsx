@@ -11,7 +11,7 @@ import { logoB } from "@utils/icons";
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
-  const [provider, setProviders] = useState(null);
+  const [provider, setProviders] = useState<any>(null);
   const { data: session } = useSession();
   const fetchProviders = async () => {
     const response = await getProviders();
@@ -61,7 +61,7 @@ const Sidebar = () => {
                   <Link href="/profile">
                     <Image
                       className="cursor-pointer rounded-full ml-2 xl:ml-0 border-[1px] border-primary"
-                      src={session.user.image}
+                      src={session?.user?.image}
                       alt="Profile Picture"
                       width={37}
                       height={37}

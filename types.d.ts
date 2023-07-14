@@ -24,3 +24,10 @@ export interface IUser {
   profilePicture: string;
   email: string;
 }
+
+export interface ISession {
+  _id: string;
+  user: string;
+  image: string;
+  email: string;
+}

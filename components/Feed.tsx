@@ -1,6 +1,6 @@
 "use client";
 import { ImageCard, NoResults } from "@/components";
-import { ImagePost } from "@types/types";
+import { ImagePost } from "@types";
 import { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { BiLoaderAlt } from "react-icons/bi";
@@ -25,7 +25,7 @@ const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSearchChange = (e) => {};
+  const handleSearchChange = () => {};
   const fetchPosts = async () => {
     setLoading(true);
     const response = await fetch("/backend/post");
