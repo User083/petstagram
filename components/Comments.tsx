@@ -84,7 +84,7 @@ const Comments = ({
             ))}
           </div>
         ) : (
-          <NoResults text="No comments yet" />
+          <p className="text-md text-gray-400 p-2">No comments yet</p>
         )}
       </div>
       {session?.user?._id && (

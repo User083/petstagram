@@ -131,7 +131,7 @@ const ImageCard = ({ post }: IProps) => {
                 <IoChatbubbleOutline
                   className="hover:text-gray-400 cursor-pointer text-2xl"
                   onClick={() => {
-                    setViewComments(true);
+                    setViewComments((prev) => !prev);
                   }}
                 />
               </div>

@@ -4,6 +4,7 @@ import { ImagePost } from "@types";
 import { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { BiLoaderAlt } from "react-icons/bi";
+import { useRouter } from "next/navigation";
 
 interface IProps {
   posts: ImagePost[];
@@ -21,11 +22,17 @@ const PostList = ({ posts }: IProps) => {
 };
 
 const Feed = () => {
+  const router = useRouter();
   const [posts, setPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSearchChange = () => {};
+  const handleSearch = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (searchText) {
+      router.push(`/search/${searchText}`);
+    }
+  };
   const fetchPosts = async () => {
     setLoading(true);
     const response = await fetch("/backend/post");
@@ -43,15 +50,23 @@ const Feed = () => {
 
   return (
     <section className="flex flex-col mt-5 gap-10">
-      <form className="w-full flex gap-3 items-center">
-        <IoSearchOutline className="text-3xl text-gray-400" />
+      <form
+        className="absolute md:static top-10 -left-20 bg-white flex"
+        onSubmit={handleSearch}
+      >
         <input
-          className="peer ring rounded ring-gray-200 border-gray-200 px-2 py-2 focus:ring-primary focus:border-primary"
+          className=" relative md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-primary focus:border-2 rounded-full md:top-0 w-[300px] md:w-[350px] p-3 focus:ring-primary"
           type="text"
           value={searchText}
           placeholder="Search posts"
-          onChange={handleSearchChange}
+          onChange={(e) => setSearchText(e.target.value)}
         />
+        <button
+          onClick={handleSearch}
+          className="md:right-5 right-6 border-gray-300 top-4 pl-4 text-2xl text-gray-400 hover:text-primary"
+        >
+          <IoSearchOutline />
+        </button>
       </form>
       {loading ? (
         <p className="animate-pulse  title">
