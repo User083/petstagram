@@ -12,16 +12,19 @@ interface IProps {
 
 const Like = ({ handleDislike, handleLike, likes, setLikes }: IProps) => {
   const [liked, setLiked] = useState<boolean>();
+  const [like, setLike] = useState(false);
 
   const { data: session } = useSession();
   const filterLikes = likes?.filter((item) => item._ref === session?.user._id);
   useEffect(() => {
     if (filterLikes?.length > 0) {
       setLiked(true);
+      setLike(true);
     } else {
       setLiked(false);
+      setLike(false);
     }
-  }, [likes]);
+  }, []);
   return (
     <>
       <button>
@@ -31,7 +34,7 @@ const Like = ({ handleDislike, handleLike, likes, setLikes }: IProps) => {
             onClick={() => {
               handleDislike();
               setLiked(false);
-              setLikes(likes.length);
+              like ? setLikes(likes.length - 1) : setLikes(likes.length);
             }}
           />
         ) : (
@@ -40,7 +43,7 @@ const Like = ({ handleDislike, handleLike, likes, setLikes }: IProps) => {
             onClick={() => {
               handleLike();
               setLiked(true);
-              setLikes(likes.length + 1);
+              like ? setLikes(likes.length) : setLikes(likes.length + 1);
             }}
           />
         )}
