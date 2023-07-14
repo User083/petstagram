@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import SidebarFooter from "./SidebarFooter";
 import ImageCard from "./ImageCard";
@@ -9,7 +8,6 @@ import Upload from "./Upload";
 import Users from "./Users";
 
 export {
-  Navbar,
   Sidebar,
   SidebarFooter,
   NoResults,
