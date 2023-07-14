@@ -19,6 +19,7 @@ export const allPostsQuery = () => {
     comments[]{
       comment,
       _key,
+      _createdAt,
       postedBy->{
       _id,
       userName,

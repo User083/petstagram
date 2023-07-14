@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ImagePost } from "@types";
 import { MdVerified } from "react-icons/md";
 import { IoChatbubbleOutline } from "react-icons/io5";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { topics } from "@utils/constants";
 import Comments from "./Comments";
 import Like from "./Like";
@@ -19,7 +19,8 @@ const ImageCard = ({ post }: IProps) => {
   const { data: session } = useSession();
   const [likes, setLikes] = useState(post.likes.length);
   const [viewComments, setViewComments] = useState(false);
-  const [comments, setComments] = useState<any[] | null>([]);
+  const [isPostingComment, setIsPostingComment] = useState(false);
+  const [comment, setComment] = useState("");
 
   const handleLike = async (like: boolean) => {
     if (session?.user._id) {
@@ -40,11 +41,34 @@ const ImageCard = ({ post }: IProps) => {
       }
     }
   };
-  useEffect(() => {
-    if (post.comments != null) {
-      setComments(post.comments.length);
+
+  const addComment = async (e: FormEvent) => {
+    e.preventDefault();
+    if (session?.user._id && comment) {
+      setIsPostingComment(true);
+      try {
+        const commentData = {
+          userId: session.user._id,
+          postId: post._id,
+          comment,
+        };
+
+        await fetch(`/backend/post/${post._id}`, {
+          method: "PUT",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(commentData),
+        }).then((res) => {
+          console.log(res.status);
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsPostingComment(false);
+        setComment("");
+      }
     }
-  }, []);
+  };
+
   return (
     <div className="flex flex-col border-b-2 border-gray-200 pb-6">
       <div>
@@ -106,7 +130,9 @@ const ImageCard = ({ post }: IProps) => {
 
                 <IoChatbubbleOutline
                   className="hover:text-gray-400 cursor-pointer text-2xl"
-                  onClick={() => {}}
+                  onClick={() => {
+                    setViewComments(true);
+                  }}
                 />
               </div>
               <p className="font-semibold px-2 text-sm">{likes} likes</p>
@@ -115,30 +141,36 @@ const ImageCard = ({ post }: IProps) => {
                 {post.caption}
               </p>
 
-              {/* {viewComments ? (
-                  <Comments />
-                ) : (
-                  <>
-                    {" "}
-                    {comments.length > 0 ? (
-                      <button
-                        className="flex px-2 py-1"
-                        onClick={() => {
-                          setViewComments(true);
-                        }}
-                      >
-                        {" "}
-                        <p className="text-sm text-gray-400">
-                          View all {comments.length} comments
-                        </p>
-                      </button>
-                    ) : (
-                      <p className=" px-2 py-1 text-sm text-gray-400">
-                        No comments yet
+              {viewComments ? (
+                <Comments
+                  isPostingComment={isPostingComment}
+                  addComment={addComment}
+                  comment={comment}
+                  setComment={setComment}
+                  comments={post.comments}
+                />
+              ) : (
+                <>
+                  {" "}
+                  {post.comments.length > 0 ? (
+                    <button
+                      className="flex px-2 py-1"
+                      onClick={() => {
+                        setViewComments(true);
+                      }}
+                    >
+                      {" "}
+                      <p className="text-sm text-gray-400">
+                        View all {post.comments.length} comments
                       </p>
-                    )}
-                  </>
-                )} */}
+                    </button>
+                  ) : (
+                    <p className=" px-2 py-1 text-sm text-gray-400">
+                      No comments yet
+                    </p>
+                  )}
+                </>
+              )}
             </div>
             <div>
               {topics.map((topic) =>
