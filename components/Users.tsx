@@ -20,6 +20,7 @@ const Users = () => {
         <div className="flex gap-2">
           {users.map((user) => (
             <Image
+              key={user._id}
               src={user.profilePicture}
               alt="User"
               width={60}

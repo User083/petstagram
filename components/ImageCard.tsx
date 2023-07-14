@@ -4,25 +4,45 @@ import Image from "next/image";
 import Link from "next/link";
 import { ImagePost } from "@types";
 import { MdVerified } from "react-icons/md";
-import { IoHeartOutline, IoHeart, IoChatbubbleOutline } from "react-icons/io5";
+import { IoChatbubbleOutline } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import { topics } from "@utils/constants";
+import Comments from "./Comments";
+import Like from "./Like";
+import { useSession } from "next-auth/react";
 
 interface IProps {
   post: ImagePost;
 }
 
 const ImageCard = ({ post }: IProps) => {
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(0);
+  const { data: session } = useSession();
+  const [likes, setLikes] = useState(post.likes.length);
+  const [viewComments, setViewComments] = useState(false);
   const [comments, setComments] = useState<any[] | null>([]);
 
+  const handleLike = async (like: boolean) => {
+    if (session?.user._id) {
+      try {
+        const likeData = {
+          userId: session.user._id,
+          postId: post._id,
+          like,
+        };
+
+        await fetch("/backend/like", {
+          method: "PUT",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(likeData),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   useEffect(() => {
     if (post.comments != null) {
       setComments(post.comments.length);
-    }
-    if (post.likes != null) {
-      setLikes(post.likes.length);
     }
   }, []);
   return (
@@ -63,37 +83,26 @@ const ImageCard = ({ post }: IProps) => {
 
       <div className="lg:ml-20 flex gap-4 relative">
         <div className="rounded-3xl">
-          <Link href="/">
-            <>
-              <Image
-                src={post.image.asset.url}
-                alt="Image Post"
-                width={600}
-                height={600}
-                className="bg-gray-100 cursor-pointer rounded w-[250px] md:w-[400px] lg:h-[800px] md:h-[600px] lg:w-[600px] h-[300px] object-cover"
-              />
-            </>
-          </Link>
+          {/* <Link href={`/detail/${post._id}`}> */}
+          <>
+            <Image
+              src={post.image.asset.url}
+              alt="Image Post"
+              width={600}
+              height={600}
+              className="bg-gray-100 cursor-pointer rounded w-[250px] md:w-[400px] lg:h-[800px] md:h-[600px] lg:w-[600px] h-[300px] object-cover"
+            />
+          </>
+          {/* </Link> */}
           <div className="flex justify-between">
             <div className="flex flex-col gap-1 px-2 py-2">
               <div className="flex gap-2 py-2">
-                {liked ? (
-                  <IoHeart
-                    className="text-primary cursor-pointer text-2xl"
-                    onClick={() => {
-                      setLiked((prev) => !prev);
-                      setLikes((prev) => prev - 1);
-                    }}
-                  />
-                ) : (
-                  <IoHeartOutline
-                    className="hover:text-primary cursor-pointer text-2xl"
-                    onClick={() => {
-                      setLiked((prev) => !prev);
-                      setLikes((prev) => prev + 1);
-                    }}
-                  />
-                )}
+                <Like
+                  likes={post.likes}
+                  setLikes={setLikes}
+                  handleLike={() => handleLike(true)}
+                  handleDislike={() => handleLike(false)}
+                />
 
                 <IoChatbubbleOutline
                   className="hover:text-gray-400 cursor-pointer text-2xl"
@@ -105,18 +114,31 @@ const ImageCard = ({ post }: IProps) => {
                 <span className="font-semibold">{post.postedBy.userName}</span>{" "}
                 {post.caption}
               </p>
-              {comments.length > 0 ? (
-                <button className="flex px-2 py-1">
-                  {" "}
-                  <p className="text-sm text-gray-400">
-                    View all {comments.length} comments
-                  </p>
-                </button>
-              ) : (
-                <p className=" px-2 py-1 text-sm text-gray-400">
-                  No comments yet
-                </p>
-              )}
+
+              {/* {viewComments ? (
+                  <Comments />
+                ) : (
+                  <>
+                    {" "}
+                    {comments.length > 0 ? (
+                      <button
+                        className="flex px-2 py-1"
+                        onClick={() => {
+                          setViewComments(true);
+                        }}
+                      >
+                        {" "}
+                        <p className="text-sm text-gray-400">
+                          View all {comments.length} comments
+                        </p>
+                      </button>
+                    ) : (
+                      <p className=" px-2 py-1 text-sm text-gray-400">
+                        No comments yet
+                      </p>
+                    )}
+                  </>
+                )} */}
             </div>
             <div>
               {topics.map((topic) =>
@@ -144,5 +166,4 @@ const ImageCard = ({ post }: IProps) => {
     </div>
   );
 };
-
 export default ImageCard;
