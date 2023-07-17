@@ -48,20 +48,20 @@ const Sidebar = () => {
                 />
               </div>
             </Link>
-            <div className="xl:border-b-2 xl:pb-4">
+            <div className="w-full flex xl:justify-start justify-center  hover:bg-gray-200 rounded-xl">
               <Link
                 href="/"
-                className="font-semibold m-3 mt-4 hidden xl:flex items-center gap-2 hover:text-primary"
+                className="font-semibold m-3 mt-4 hidden xl:flex items-center gap-2 "
               >
                 <AiFillHome className="text-3xl" />
                 Home
               </Link>
             </div>
 
-            <div className=" w-full flex xl:justify-start justify-center">
+            <div className=" w-full flex xl:justify-start justify-center hover:bg-gray-200 rounded-xl">
               <Link
                 href="/upload"
-                className="font-semibold m-3 mt-4 hidden xl:flex items-center gap-2 hover:text-primary"
+                className="font-semibold m-3 mt-4 hidden xl:flex items-center gap-2 "
               >
                 <FiPlusSquare className="text-3xl " />
                 Create
@@ -75,23 +75,27 @@ const Sidebar = () => {
             </div>
             <Discover />
             {session?.user ? (
-              <div className="m-3 mt-2">
-                <div className="xl:flex items-center gap-3 xl:py-3 hover:text-primary">
-                  <Link href={`/profile/${session?.user._id}`} rel="preload">
+              <div className="w-full flex xl:justify-start justify-center  hover:bg-gray-200 rounded-xl">
+                <div className="xl:flex items-center gap-3">
+                  <Link
+                    href={`/profile/${session?.user._id}`}
+                    rel="preload"
+                    className="flex gap-2 m-3 mt-4 items-center"
+                  >
                     <>
                       {" "}
                       <Image
-                        className="cursor-pointer rounded-full border-[1px] border-primary"
+                        className="cursor-pointer rounded-full "
                         src={session?.user?.image}
                         alt="Profile Picture"
                         width={30}
                         height={30}
                       />
-                    </>
+                    </>{" "}
+                    <p className=" hidden xl:flex">
+                      <span className="font-semibold ">Profile</span>
+                    </p>
                   </Link>
-                  <p className=" hidden xl:flex">
-                    <span className="font-semibold ">Profile</span>
-                  </p>
                 </div>
               </div>
             ) : (

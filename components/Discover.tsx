@@ -16,7 +16,7 @@ const Discover = () => {
 
   return (
     <div className="">
-      <div className="flex justify-center xl:justify-start hover:text-primary">
+      <div className="flex justify-center xl:justify-start hover:bg-gray-200 rounded-xl">
         <button
           onClick={() => {
             setShowOptions((prev) => !prev);
@@ -31,7 +31,7 @@ const Discover = () => {
         </button>
       </div>
       {showOptions ? (
-        <div className="flex gap-3 flex-wrap">
+        <div className="flex gap-3 flex-wrap mt-2">
           {topics.map((topic) => (
             <Link href={`/?topic=${topic.name}`} key={topic.name}>
               <div
