@@ -24,7 +24,13 @@ const Upload = () => {
 
   const uploadImage = async (e: any) => {
     const selectedFile = e.target.files[0];
-    const fileTypes = ["image/jpeg", "image/png", "image/jpg"];
+    const fileTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+      "image/gif",
+      "image/tiff",
+    ];
     if (fileTypes.includes(selectedFile.type)) {
       setIsLoading(true);
       client.assets

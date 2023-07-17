@@ -85,7 +85,7 @@ const PostDetail = ({ postDetails }: IProps) => {
                 <Image
                   alt={post.caption}
                   src={post?.image?.asset.url}
-                  className=" h-full cursor-pointer"
+                  className="h-full w-full"
                 />
               </div>
             </div>
@@ -93,7 +93,7 @@ const PostDetail = ({ postDetails }: IProps) => {
           <div className="relative w-[1000px] md:w-[900px] lg:w-[700px]">
             <div className="lg:mt-20 mt-10">
               <Link href={`/profile/${post.postedBy._id}`}>
-                <div className="flex gap-4 mb-4 bg-white w-full pl-10 cursor-pointer">
+                <div className="flex gap-4 mb-4 bg-white w-full pl-10">
                   <Image
                     width={60}
                     height={60}
