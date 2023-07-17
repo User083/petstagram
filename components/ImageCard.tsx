@@ -91,7 +91,7 @@ const ImageCard = ({ post }: IProps) => {
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1">
                   <p className="flex items-center md:text-md font-bold text-primary">
-                    {post.postedBy.userName}
+                    <span>{post.postedBy.userName.replace(/\s+/g, "")} </span>
                   </p>
                   <MdVerified className="text-blue-400 text-md" />
                 </div>

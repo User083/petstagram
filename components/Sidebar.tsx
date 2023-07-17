@@ -37,9 +37,15 @@ const Sidebar = () => {
       {showSidebar && (
         <div className="xl:w-400 w-20 flex flex-col justify-between mb-10 border-r-2 xl:border-0 p-3 min-h-screen">
           <div>
-            <Link href="/">
-              <div className="flex w-full items-center justify-center py-1 pb-3 ">
-                <Image src={logoB} alt="Logo" height={100} width={100} />
+            <Link href="/" as={"image"} rel="preload">
+              <div className="flex items-center justify-center py-1 pb-3 ">
+                <Image
+                  src={logoB}
+                  alt="Logo"
+                  height={100}
+                  width={100}
+                  priority
+                />
               </div>
             </Link>
             <div className="xl:border-b-2 xl:pb-4">
@@ -71,14 +77,17 @@ const Sidebar = () => {
             {session?.user ? (
               <div className="m-3 mt-2">
                 <div className="xl:flex items-center gap-3 xl:py-3 hover:text-primary">
-                  <Link href="/profile">
-                    <Image
-                      className="cursor-pointer rounded-full border-[1px] border-primary"
-                      src={session?.user?.image}
-                      alt="Profile Picture"
-                      width={30}
-                      height={30}
-                    />
+                  <Link href={`/profile/${session?.user._id}`} rel="preload">
+                    <>
+                      {" "}
+                      <Image
+                        className="cursor-pointer rounded-full border-[1px] border-primary"
+                        src={session?.user?.image}
+                        alt="Profile Picture"
+                        width={30}
+                        height={30}
+                      />
+                    </>
                   </Link>
                   <p className=" hidden xl:flex">
                     <span className="font-semibold ">Profile</span>

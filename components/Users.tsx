@@ -30,7 +30,7 @@ const Users = () => {
           {session?.user ? (
             <div className="w-full h-full">
               <div className="xl:flex items-center gap-3 xl:py-3 w-full">
-                <Link href="/profile">
+                <Link href="/profile" as={"image"} rel="preload">
                   <Image
                     className="cursor-pointer rounded-full ml-2 xl:ml-0 border-[1px] border-primary"
                     src={session?.user?.image}

@@ -36,7 +36,7 @@ const Discover = () => {
             <Link href={`/?topic=${topic.name}`} key={topic.name}>
               <div
                 className={
-                  searhParams.get("pet") === topic.name
+                  searhParams.get("topic") === topic.name
                     ? activePetStyle
                     : petStyle
                 }
