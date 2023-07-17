@@ -1,18 +1,13 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { signIn, useSession, getProviders } from "next-auth/react";
+import { useSession, getProviders } from "next-auth/react";
 import Link from "next/link";
 import { MdVerified } from "react-icons/md";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const { data: session } = useSession();
-  const [provider, setProviders] = useState<any>(null);
-  const fetchProviders = async () => {
-    const response = await getProviders();
-    setProviders(response);
-  };
 
   const getUsers = async () => {
     const response = await fetch("/backend/users");
@@ -21,7 +16,6 @@ const Users = () => {
   };
   useEffect(() => {
     getUsers();
-    fetchProviders();
   }, []);
   return (
     <div className="hidden xl:flex m-10">
@@ -30,7 +24,11 @@ const Users = () => {
           {session?.user ? (
             <div className="w-full h-full">
               <div className="xl:flex items-center gap-3 xl:py-3 w-full">
-                <Link href="/profile" rel="preload" className="w-[50px] h-auto">
+                <Link
+                  href={`/profile/${session?.user._id}`}
+                  rel="preload"
+                  className="w-[50px] h-auto"
+                >
                   <>
                     {" "}
                     <Image
@@ -58,14 +56,18 @@ const Users = () => {
           </h1>
           <div className="flex gap-2 py-2">
             {users.map((user) => (
-              <Image
-                key={user._id}
-                src={user.profilePicture}
-                alt="User"
-                width={60}
-                height={60}
-                className="rounded-full border-[1px] border-gray-200 hover:opacity-50 hover:border-highlight"
-              />
+              <Link href={`/profile/${user._id}`}>
+                <>
+                  <Image
+                    key={user._id}
+                    src={user.profilePicture}
+                    alt="User"
+                    width={60}
+                    height={60}
+                    className="rounded-full border-[1px] border-gray-200 hover:opacity-50 hover:border-highlight hover:cursor-pointer"
+                  />
+                </>
+              </Link>
             ))}
           </div>
         </div>

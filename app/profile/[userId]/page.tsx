@@ -14,7 +14,7 @@ interface IProps {
   };
 }
 
-const MyProfile = () => {
+const MyProfile = ({ params }: { params: { userId: string } }) => {
   const { data: session } = useSession();
   const [showUserPosts, setShowUserPosts] = useState<Boolean>(true);
   const [postList, setPostList] = useState<ImagePost[]>([]);
@@ -41,7 +41,7 @@ const MyProfile = () => {
   };
 
   useEffect(() => {
-    getProfile("113917507674434574113");
+    getProfile(params.userId);
   }, []);
 
   useEffect(() => {
