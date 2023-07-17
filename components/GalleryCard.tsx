@@ -8,19 +8,29 @@ interface IProps {
 
 const GalleryCard = ({ post }: IProps) => {
   return (
-    <div className="group relative">
-      <Image
-        src={post.image.asset.url}
-        alt={post.caption}
-        width={300}
-        height={300}
-      />{" "}
+    <div className="group relative hover:cursor">
+      <>
+        {" "}
+        <Image
+          src={post.image.asset.url}
+          alt={post.caption}
+          width={300}
+          height={300}
+        />{" "}
+      </>
+
       <div className="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 flex justify-center items-center text-xl w-full h-full bg-black bg-opacity-50 bottom-0">
-        <div className="flex text-white text-xl gap-2 items-center ">
-          <IoChatbubble />
-          <p className=""> {post.comments.length}</p>
-          <IoHeart />
-          <p className=""> {post.likes.length}</p>
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex text-white text-xl gap-2 items-center ">
+            <IoChatbubble />
+            <p className=""> {post.comments.length}</p>
+            <IoHeart />
+            <p className=""> {post.likes.length}</p>
+          </div>{" "}
+          <p className="text-sm text-white">
+            {" "}
+            by {post.postedBy.userName.replace(/\s+/g, "")}
+          </p>
         </div>
       </div>
     </div>

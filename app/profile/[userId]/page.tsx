@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { MdVerified } from "react-icons/md";
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 interface IProps {
   data: {
@@ -101,7 +102,9 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
       <div className="flex">
         {postList?.length > 0 ? (
           postList.map((post: ImagePost, idx: number) => (
-            <GalleryCard key={idx} post={post} />
+            <Link href={`/post/${post._id}`}>
+              <GalleryCard key={idx} post={post} />
+            </Link>
           ))
         ) : (
           <NoResults text={`No ${showUserPosts ? "" : "Liked"} Posts Yet`} />

@@ -6,6 +6,8 @@ import Feed from "./Feed";
 import Upload from "./Upload";
 import Users from "./Users";
 import GalleryCard from "./GalleryCard";
+import Comments from "./Comments";
+import Like from "./Like";
 
 export {
   Sidebar,
@@ -16,4 +18,6 @@ export {
   Upload,
   Users,
   GalleryCard,
+  Comments,
+  Like,
 };

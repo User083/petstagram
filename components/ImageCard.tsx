@@ -74,7 +74,7 @@ const ImageCard = ({ post }: IProps) => {
       <div>
         <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded items-center">
           <div className="md:w-16 md:h-16 w-10 h-10">
-            <Link href="/profile">
+            <Link href={`/profile/${post.postedBy._id}`}>
               <>
                 <Image
                   src={post.postedBy.profilePicture}
@@ -107,17 +107,17 @@ const ImageCard = ({ post }: IProps) => {
 
       <div className="lg:ml-20 flex gap-4 relative">
         <div className="rounded-3xl">
-          {/* <Link href={`/detail/${post._id}`}> */}
-          <>
-            <Image
-              src={post.image.asset.url}
-              alt="Image Post"
-              width={600}
-              height={600}
-              className="bg-gray-100 cursor-pointer rounded w-[250px] md:w-[400px] lg:h-[800px] md:h-[600px] lg:w-[600px] h-[300px] object-cover"
-            />
-          </>
-          {/* </Link> */}
+          <Link href={`/post/${post._id}`}>
+            <>
+              <Image
+                src={post.image.asset.url}
+                alt="Image Post"
+                width={600}
+                height={600}
+                className="bg-gray-100 cursor-pointer rounded w-[250px] md:w-[400px] lg:h-[800px] md:h-[600px] lg:w-[600px] h-[300px] object-cover"
+              />
+            </>
+          </Link>
           <div className="flex justify-between">
             <div className="flex flex-col gap-1 px-2 py-2">
               <div className="flex gap-2 py-2">

@@ -10,7 +10,7 @@ const Discover = () => {
   const [showOptions, setShowOptions] = useState(true);
 
   const activePetStyle =
-    "xl:border-2 hover:bg-primary xl:border-primary px-3 py-2 rounded xl:rounded-full flex items-center gap-2 justify-center cursor-pointer text-primary";
+    "xl:border-2 xl:border-primary px-3 py-2 rounded xl:rounded-full flex items-center gap-2 justify-center cursor-pointer text-primary";
   const petStyle =
     "xl:border-2 hover:bg-primary hover:text-white hover:border-white xl:border-gray-300 px-3 py-2 rounded xl:rounded-full flex items-center gap-2 justify-center cursor-pointer text-black";
 
