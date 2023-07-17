@@ -14,7 +14,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body>
         <Provider>
           <main className="">
-            <div className="flex w-full justify-center">
+            <div className="p-5 flex w-full justify-center">
               <div className="flex gap-10">
                 <Sidebar />
 

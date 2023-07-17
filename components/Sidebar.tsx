@@ -23,11 +23,11 @@ const Sidebar = () => {
     fetchProviders();
   }, []);
   const normalLink =
-    "flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold rounded";
+    "flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold rounded ";
   return (
     <div className="relative">
       <div
-        className="block xl:hidden m-5 ml-7"
+        className="block xl:hidden m-5 ml-20"
         onClick={() => {
           setShowSidebar((prev) => !prev);
         }}
@@ -35,7 +35,7 @@ const Sidebar = () => {
         {showSidebar ? <ImCancelCircle /> : <AiOutlineMenu />}
       </div>
       {showSidebar && (
-        <div className="xl:w-400 w-20 flex flex-col justify-between mb-10 border-r-2 xl:border-0 p-3 min-h-screen">
+        <div className="xl:w-[400px] flex flex-col justify-between mb-10 border-r-2 xl:border-0 p-3 min-h-screen ml-10 pl-10">
           <div>
             <Link href="/" rel="preload">
               <div className="flex items-center justify-center py-1 pb-3 ">
@@ -86,7 +86,7 @@ const Sidebar = () => {
                       {" "}
                       <Image
                         className="cursor-pointer rounded-full "
-                        src={session?.user?.image}
+                        src={session?.user?.image || ""}
                         alt="Profile Picture"
                         width={30}
                         height={30}

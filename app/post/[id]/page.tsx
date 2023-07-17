@@ -17,7 +17,7 @@ const Details = ({ params }: { params: { id: string } }) => {
   const [post, setPost] = useState<ImagePost>();
   const [isPostingComment, setIsPostingComment] = useState<boolean>(false);
   const [comment, setComment] = useState<string>("");
-  const [likes, setLikes] = useState<any[]>([]);
+  const [likes, setLikes] = useState(0);
   const fetchData = async (id: string) => {
     const res = await fetch(`/backend/post/${params.id}`);
     const data = await res.json();
@@ -27,6 +27,10 @@ const Details = ({ params }: { params: { id: string } }) => {
   useEffect(() => {
     fetchData(params.id);
   }, []);
+
+  useEffect(() => {
+    setLikes(post?.likes.length);
+  }, [post]);
 
   const handleLike = async (like: boolean) => {
     if (session?.user._id) {
@@ -65,6 +69,7 @@ const Details = ({ params }: { params: { id: string } }) => {
           body: JSON.stringify(commentData),
         }).then((res) => {
           console.log(res.status);
+          router.push(`/post/${post._id}`);
         });
       } catch (error) {
         console.log(error);
@@ -127,9 +132,7 @@ const Details = ({ params }: { params: { id: string } }) => {
                       handleLike={() => handleLike(true)}
                       handleDislike={() => handleLike(false)}
                     />
-                    <p className="text-sm font-semibold">
-                      {post.likes.length} likes
-                    </p>
+                    <p className="text-sm font-semibold">{likes} likes</p>
                   </div>
                 )}
                 <div className="mt-2">
