@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { AiFillHome, AiOutlineMenu } from "react-icons/ai";
+import { FiPlusSquare, FiCompass } from "react-icons/fi";
 import { ImCancelCircle } from "react-icons/im";
 import { useState, useEffect } from "react";
 import SidebarFooter from "./SidebarFooter";
@@ -12,6 +13,7 @@ import { logoB } from "@utils/icons";
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
   const [provider, setProviders] = useState<any>(null);
+  const [showOptions, setShowOptions] = useState(false);
   const { data: session } = useSession();
   const fetchProviders = async () => {
     const response = await getProviders();
@@ -23,9 +25,9 @@ const Sidebar = () => {
   const normalLink =
     "flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold rounded";
   return (
-    <div>
+    <div className="relative">
       <div
-        className="block xl:hidden m-2 ml-4 mt-3"
+        className="block xl:hidden m-5 ml-7"
         onClick={() => {
           setShowSidebar((prev) => !prev);
         }}
@@ -36,57 +38,51 @@ const Sidebar = () => {
         <div className="xl:w-400 w-20 flex flex-col justify-between mb-10 border-r-2 xl:border-0 p-3 min-h-screen">
           <div>
             <Link href="/">
-              <div className="flex w-full items-center justify-center py-1">
-                <>
-                  <Image src={logoB} alt="Logo" height={100} width={100} />
-                </>
+              <div className="flex w-full items-center justify-center py-1 pb-3 ">
+                <Image src={logoB} alt="Logo" height={100} width={100} />
               </div>
             </Link>
             <div className="xl:border-b-2 xl:pb-4">
-              <Link href="/">
-                <div className={`${normalLink} flex items-center`}>
-                  <p className="text-2xl">
-                    <AiFillHome />
-                  </p>
-                  <span className="text-xl hidden xl:block font-semibold">
-                    Home
-                  </span>
-                </div>
+              <Link
+                href="/upload"
+                className="font-semibold m-3 mt-4 hidden xl:flex items-center gap-2 hover:text-primary"
+              >
+                <AiFillHome className="text-3xl" />
+                Home
               </Link>
             </div>
 
+            <div className=" w-full flex xl:justify-start justify-center">
+              <Link
+                href="/upload"
+                className="font-semibold m-3 mt-4 hidden xl:flex items-center gap-2 hover:text-primary"
+              >
+                <FiPlusSquare className="text-3xl " />
+                Create
+              </Link>
+              <Link
+                href="/upload"
+                className="font-bold text-3xl xl:text-md block xl:hidden"
+              >
+                <FiPlusSquare className="hover:text-primary m-3 mt-4" />
+              </Link>
+            </div>
+            <Discover />
             {session?.user ? (
-              <div className="">
-                <div className="xl:flex items-center gap-3 xl:py-3">
+              <div className="m-3 mt-2">
+                <div className="xl:flex items-center gap-3 xl:py-3 hover:text-primary">
                   <Link href="/profile">
                     <Image
-                      className="cursor-pointer rounded-full ml-2 xl:ml-0 border-[1px] border-primary"
+                      className="cursor-pointer rounded-full border-[1px] border-primary"
                       src={session?.user?.image}
                       alt="Profile Picture"
-                      width={37}
-                      height={37}
+                      width={30}
+                      height={30}
                     />
                   </Link>
-                  <p className="text-gray-400 text-sm hidden xl:flex">
-                    <span className="text-primary ">{session.user.name}</span>
+                  <p className=" hidden xl:flex">
+                    <span className="font-semibold ">Profile</span>
                   </p>
-                </div>
-                <div className="flex gap-3 w-full">
-                  <Link
-                    className="rounded-full bg-primary border-white text-white font-semibold border-[1px] px-2 hover:border-primary hover:bg-white hover:text-primary xl:flex w-full justify-center hidden"
-                    href="/upload"
-                  >
-                    Upload
-                  </Link>
-                  <button
-                    className="rounded-full border-gray-400 text-gray-400 text-sm border-[1px] px-2 hover:border-primary hover:text-primary xl:flex w-full justify-center items-center hidden"
-                    type="button"
-                    onClick={() => {
-                      signOut();
-                    }}
-                  >
-                    Sign out
-                  </button>
                 </div>
               </div>
             ) : (
@@ -107,7 +103,6 @@ const Sidebar = () => {
                 )}
               </>
             )}
-            <Discover />
           </div>
           <SidebarFooter />
         </div>

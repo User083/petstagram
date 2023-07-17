@@ -31,11 +31,23 @@ export const topics = [
   },
 
   {
-    name: "water",
+    name: "aquatic",
     icon: <GiDoubleFish />,
   },
   {
     name: "reptiles",
     icon: <GiSandSnake />,
   },
+];
+
+export const footerTags = [
+  "About",
+  "Help",
+  "Press",
+  "API",
+  "Jobs",
+  "Privacy",
+  "Terms",
+  "Locations",
+  "Language",
 ];

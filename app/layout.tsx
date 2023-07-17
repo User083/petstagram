@@ -13,13 +13,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="en">
       <body>
         <Provider>
-          <main className="">
-            <div className="xl:w-[1200px] m-20 overflow-hidden min-h-screen">
-              <div className="flex">
-                <div className=" z-10 bg-white">
+          <main className="flex w-full xl:w-[1500px] justify-center items-center h-full overflow-hidden ">
+            <div>
+              <div className="flex gap-10">
+                <div>
                   <Sidebar />
                 </div>
-                <div className="w-full z-0">{children}</div>
+                <div className="w-full">{children}</div>
                 <Users />
               </div>
             </div>
