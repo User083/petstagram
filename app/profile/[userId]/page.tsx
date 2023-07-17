@@ -1,5 +1,5 @@
 "use client";
-import { ImageCard, NoResults } from "@/components";
+import { GalleryCard, NoResults } from "@/components";
 import { IUser, ImagePost } from "@types";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -41,14 +41,14 @@ const MyProfile = () => {
   };
 
   useEffect(() => {
-    getProfile("101544904341257963667");
+    getProfile("113917507674434574113");
   }, []);
 
   useEffect(() => {
     fetchPosts();
   }, [showUserPosts, data.userLikedPosts, data.userPosts]);
   return (
-    <section className="w-full mt-10">
+    <div className="w-full mt-10">
       <div className="flex items-center justify-between w-full">
         <div className="flex gap-6 md:gap-10 mb-4 bg-white w-full items-center">
           <div className="w-16 h-16 md:w-32 md:h-32">
@@ -72,7 +72,7 @@ const MyProfile = () => {
         {session?.user._id === data.user._id ? (
           <button
             onClick={() => {
-              signOut;
+              signOut();
             }}
             className="text-sm text-white py-2 px-2 m-3 hover:bg-primary w-[100px] bg-gray-200 rounded"
           >
@@ -98,16 +98,16 @@ const MyProfile = () => {
           </p>
         </div>
       </div>
-      <div className="flex gap-6 flex-wrap md:justify-start">
+      <div className="flex">
         {postList?.length > 0 ? (
           postList.map((post: ImagePost, idx: number) => (
-            <ImageCard key={idx} post={post} />
+            <GalleryCard key={idx} post={post} />
           ))
         ) : (
           <NoResults text={`No ${showUserPosts ? "" : "Liked"} Posts Yet`} />
         )}
       </div>
-    </section>
+    </div>
   );
 };
 

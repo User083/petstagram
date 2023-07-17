@@ -1,9 +1,10 @@
-import { Feed } from "@/components";
+import { Feed, Users } from "@/components";
 
 const Home = () => {
   return (
-    <section className="w-full flex items-center justify-center">
+    <section className="flex gap-10 xl:gap-20 w-full">
       <Feed />
+      <Users />
     </section>
   );
 };

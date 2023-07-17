@@ -137,7 +137,9 @@ const ImageCard = ({ post }: IProps) => {
               </div>
               <p className="font-semibold px-2 text-sm">{likes} likes</p>
               <p className=" px-2 text-sm">
-                <span className="font-semibold">{post.postedBy.userName}</span>{" "}
+                <span className="font-semibold">
+                  {post.postedBy.userName.replace(/\s+/g, "")}{" "}
+                </span>{" "}
                 {post.caption}
               </p>
 

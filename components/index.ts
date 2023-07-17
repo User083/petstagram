@@ -5,5 +5,15 @@ import NoResults from "./NoResults";
 import Feed from "./Feed";
 import Upload from "./Upload";
 import Users from "./Users";
+import GalleryCard from "./GalleryCard";
 
-export { Sidebar, SidebarFooter, NoResults, ImageCard, Feed, Upload, Users };
+export {
+  Sidebar,
+  SidebarFooter,
+  NoResults,
+  ImageCard,
+  Feed,
+  Upload,
+  Users,
+  GalleryCard,
+};

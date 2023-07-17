@@ -37,7 +37,7 @@ const Sidebar = () => {
       {showSidebar && (
         <div className="xl:w-400 w-20 flex flex-col justify-between mb-10 border-r-2 xl:border-0 p-3 min-h-screen">
           <div>
-            <Link href="/" as={"image"} rel="preload">
+            <Link href="/" rel="preload">
               <div className="flex items-center justify-center py-1 pb-3 ">
                 <Image
                   src={logoB}
@@ -50,7 +50,7 @@ const Sidebar = () => {
             </Link>
             <div className="xl:border-b-2 xl:pb-4">
               <Link
-                href="/upload"
+                href="/"
                 className="font-semibold m-3 mt-4 hidden xl:flex items-center gap-2 hover:text-primary"
               >
                 <AiFillHome className="text-3xl" />
