@@ -155,18 +155,19 @@ const ImageCard = ({ post }: IProps) => {
                 <>
                   {" "}
                   {post.comments.length > 0 ? (
-                    <button
-                      className="flex px-2 py-1"
-                      onClick={() => {
-                        setViewComments(true);
-                      }}
-                    >
-                      {" "}
+                    // <button
+                    //   className="flex px-2 py-1"
+                    //   onClick={() => {
+                    //     setViewComments(true);
+                    //   }}
+                    //   >
+                    <Link href={`/post/${post._id}`} className="flex px-2 py-1">
                       <p className="text-sm text-gray-400">
                         View all {post.comments.length} comments
-                      </p>
-                    </button>
+                      </p>{" "}
+                    </Link>
                   ) : (
+                    // </button>
                     <p className=" px-2 py-1 text-sm text-gray-400">
                       No comments yet
                     </p>
@@ -178,7 +179,7 @@ const ImageCard = ({ post }: IProps) => {
               {topics.map((topic) =>
                 topic.name === post.topic ? (
                   <Link
-                    href={`/?${topic.name}`}
+                    href={`/?topic=${topic.name}`}
                     key={topic.name}
                     className=" group"
                   >

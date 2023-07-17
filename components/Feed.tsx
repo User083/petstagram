@@ -50,7 +50,7 @@ const Feed = () => {
 
   return (
     <section className="flex flex-col mt-5 gap-10 w-full ">
-      <form className="top-10 bg-white flex" onSubmit={handleSearch}>
+      {/* <form className="top-10 bg-white flex" onSubmit={handleSearch}>
         <input
           className=" relative md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-primary focus:border-2 rounded-full md:top-0 w-[300px] md:w-[350px] p-3 focus:ring-primary"
           type="text"
@@ -64,7 +64,7 @@ const Feed = () => {
         >
           <IoSearchOutline />
         </button>
-      </form>
+      </form> */}
       {loading ? (
         <p className="animate-pulse  title">
           <BiLoaderAlt className="animate-spin text-6xl text-primary" />
