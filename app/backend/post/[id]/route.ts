@@ -35,3 +35,12 @@ export const PUT = async (request: Request, { params }: any) => {
     return new Response("Failed to post comment", { status: 500 });
   }
 };
+
+export const DELETE = async (request: Request, { params }: any) => {
+  try {
+    await client.delete(params.id);
+    return new Response("Successfully deleted post", { status: 202 });
+  } catch (error) {
+    return new Response("Failed", { status: 500 });
+  }
+};

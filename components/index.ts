@@ -8,6 +8,7 @@ import Users from "./Users";
 import GalleryCard from "./GalleryCard";
 import Comments from "./Comments";
 import Like from "./Like";
+import PostOptions from "./PostOptions";
 
 export {
   Sidebar,
@@ -20,4 +21,5 @@ export {
   GalleryCard,
   Comments,
   Like,
+  PostOptions,
 };

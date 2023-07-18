@@ -10,6 +10,8 @@ import { topics } from "@utils/constants";
 import Comments from "./Comments";
 import Like from "./Like";
 import { useSession } from "next-auth/react";
+import { FiMoreHorizontal } from "react-icons/fi";
+import PostOptions from "./PostOptions";
 
 interface IProps {
   post: ImagePost;
@@ -21,7 +23,19 @@ const ImageCard = ({ post }: IProps) => {
   const [viewComments, setViewComments] = useState(false);
   const [isPostingComment, setIsPostingComment] = useState(false);
   const [comment, setComment] = useState("");
+  const [showOptions, setShowOptions] = useState(false);
 
+  const handleDelete = async (postId: string) => {
+    try {
+      await fetch(`/backend/post/${post._id}`, {
+        method: "DELETE",
+      }).then((res) => {
+        console.log(res.status);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleLike = async (like: boolean) => {
     if (session?.user._id) {
       try {
@@ -72,35 +86,57 @@ const ImageCard = ({ post }: IProps) => {
   return (
     <div className="flex flex-col border-b-2 border-gray-200 pb-6">
       <div>
-        <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded items-center">
-          <div className="md:w-16 md:h-16 w-10 h-10">
-            <Link href={`/profile/${post.postedBy._id}`}>
-              <>
-                <Image
-                  src={post.postedBy.profilePicture}
-                  alt="Profile Photo"
-                  width={60}
-                  height={60}
-                  className="object-contain rounded-full"
-                />
-              </>
-            </Link>
-          </div>
-          <div>
-            <Link href="/">
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1">
-                  <p className="flex items-center md:text-md font-bold text-primary">
-                    <span>{post.postedBy.userName.replace(/\s+/g, "")} </span>
-                  </p>
-                  <MdVerified className="text-blue-400 text-md" />
-                </div>
+        <div className="flex justify-between items-center">
+          <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded items-center">
+            <div className="md:w-16 md:h-16 w-10 h-10">
+              <Link href={`/profile/${post.postedBy._id}`}>
+                <>
+                  <Image
+                    src={post.postedBy.profilePicture}
+                    alt="Profile Photo"
+                    width={60}
+                    height={60}
+                    className="object-contain rounded-full"
+                  />
+                </>
+              </Link>
+            </div>
+            <div>
+              <Link href="/">
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1">
+                    <p className="flex items-center md:text-md font-bold text-primary">
+                      <span>{post.postedBy.userName.replace(/\s+/g, "")} </span>
+                    </p>
+                    <MdVerified className="text-blue-400 text-md" />
+                  </div>
 
-                <p className="capitalize font-medium text-xs text-gray-500 hidden md:block">
-                  {post._createdAt}
-                </p>
-              </div>
-            </Link>
+                  <p className="capitalize font-medium text-xs text-gray-500 hidden md:block">
+                    {post._createdAt}
+                  </p>
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          <div className="relative">
+            {" "}
+            <FiMoreHorizontal
+              className="cursor-pointer hover:text-primary text-xl"
+              onClick={() => {
+                setShowOptions((prev) => !prev);
+              }}
+            />
+            {showOptions ? (
+              <PostOptions
+                handleDelete={() => handleDelete(post._id)}
+                setShowOptions={setShowOptions}
+                postedBy={post.postedBy}
+                userId={session?.user._id}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
@@ -155,19 +191,12 @@ const ImageCard = ({ post }: IProps) => {
                 <>
                   {" "}
                   {post.comments.length > 0 ? (
-                    // <button
-                    //   className="flex px-2 py-1"
-                    //   onClick={() => {
-                    //     setViewComments(true);
-                    //   }}
-                    //   >
                     <Link href={`/post/${post._id}`} className="flex px-2 py-1">
                       <p className="text-sm text-gray-400">
                         View all {post.comments.length} comments
                       </p>{" "}
                     </Link>
                   ) : (
-                    // </button>
                     <p className=" px-2 py-1 text-sm text-gray-400">
                       No comments yet
                     </p>
