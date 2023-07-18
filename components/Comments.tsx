@@ -42,7 +42,7 @@ const CommentCard = ({ comment, postedBy, _createdAt }: IComment) => {
     <div className="px-1 py-1 flex flex-col">
       <div className="flex gap-2 items-center">
         <Image
-          src={poster?.profilePicture}
+          src={poster?.profilePicture || ""}
           alt="Profile picture"
           height={30}
           width={30}

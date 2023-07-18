@@ -119,7 +119,7 @@ const ImageCard = ({ post }: IProps) => {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="">
             {" "}
             <FiMoreHorizontal
               className="cursor-pointer hover:text-primary text-xl"
@@ -127,33 +127,40 @@ const ImageCard = ({ post }: IProps) => {
                 setShowOptions((prev) => !prev);
               }}
             />
-            {showOptions ? (
-              <PostOptions
-                handleDelete={() => handleDelete(post._id)}
-                setShowOptions={setShowOptions}
-                postedBy={post.postedBy}
-                userId={session?.user._id}
-              />
-            ) : (
-              <></>
-            )}
           </div>
         </div>
       </div>
 
-      <div className="lg:ml-20 flex gap-4 relative">
-        <div className="rounded-3xl">
-          <Link href={`/post/${post._id}`}>
+      <div className="lg:ml-20 flex gap-4 ">
+        <div className="rounded-3xl relative">
+          <Link
+            href={`/post/${post._id}`}
+            className={
+              showOptions
+                ? `relative pointer-events-none`
+                : `relative pointer-events-auto`
+            }
+          >
             <>
               <Image
                 src={post.image.asset.url}
                 alt="Image Post"
                 width={600}
                 height={600}
-                className="bg-gray-100 cursor-pointer rounded w-[250px] md:w-[400px] lg:h-[800px] md:h-[600px] lg:w-[600px] h-[300px] object-cover"
+                className="bg-gray-100 cursor-pointer rounded w-[250px] md:w-[400px] lg:h-[800px] md:h-[600px] lg:w-[600px] h-[300px] object-cover "
               />
             </>
-          </Link>
+          </Link>{" "}
+          {showOptions ? (
+            <PostOptions
+              handleDelete={() => handleDelete(post._id)}
+              setShowOptions={setShowOptions}
+              posterId={post.postedBy._id}
+              userId={session?.user._id}
+            />
+          ) : (
+            <></>
+          )}
           <div className="flex justify-between">
             <div className="flex flex-col gap-1 px-2 py-2">
               <div className="flex gap-2 py-2">

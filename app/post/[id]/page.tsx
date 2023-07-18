@@ -6,11 +6,8 @@ import { ImagePost } from "@types";
 import { Comments, Like } from "@components";
 import { useSession } from "next-auth/react";
 import { MdVerified } from "react-icons/md";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-interface IProps {
-  postDetails: ImagePost;
-}
+
 const Details = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
   const { data: session } = useSession();
@@ -37,7 +34,7 @@ const Details = ({ params }: { params: { id: string } }) => {
       try {
         const likeData = {
           userId: session.user._id,
-          postId: post._id,
+          postId: post?._id,
           like,
         };
 
@@ -59,17 +56,17 @@ const Details = ({ params }: { params: { id: string } }) => {
       try {
         const commentData = {
           userId: session.user._id,
-          postId: post._id,
+          postId: post?._id,
           comment,
         };
 
-        await fetch(`/backend/post/${post._id}`, {
+        await fetch(`/backend/post/${post?._id}`, {
           method: "PUT",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(commentData),
         }).then((res) => {
           console.log(res.status);
-          router.push(`/post/${post._id}`);
+          router.push(`/post/${post?._id}`);
         });
       } catch (error) {
         console.log(error);
