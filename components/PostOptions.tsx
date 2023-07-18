@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 
 interface IProps {
   handleDelete: () => void;
-  handlesetShowOptions: Dispatch<SetStateAction<boolean>>;
+  setShowOptions: Dispatch<SetStateAction<boolean>>;
   userId: string;
   posterId: string;
 }
@@ -22,7 +22,7 @@ const PostOptions = ({
             <button
               className="py-2 px-2 flex gap-2 items-center border-gray-200 border-b w-full flex justify-center pointer-events-auto"
               onClick={() => {
-                handleDelete;
+                handleDelete();
                 setShowOptions((prev: boolean) => !prev);
               }}
             >
