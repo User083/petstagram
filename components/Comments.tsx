@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import NoResults from "./NoResults";
+
 import { useSession } from "next-auth/react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 

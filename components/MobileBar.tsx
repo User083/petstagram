@@ -1,0 +1,77 @@
+"use client";
+import { AiFillHome } from "react-icons/ai";
+import { FiPlusSquare, FiCompass } from "react-icons/fi";
+import { FaUserCircle } from "react-icons/fa";
+import Link from "next/link";
+import { signIn, useSession, getProviders } from "next-auth/react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+
+const MobileBar = () => {
+  const [provider, setProviders] = useState<any>(null);
+  const { data: session } = useSession();
+  const fetchProviders = async () => {
+    const response = await getProviders();
+    setProviders(response);
+  };
+  useEffect(() => {
+    fetchProviders();
+  }, []);
+  return (
+    <div className="bottom-0 left-0 fixed m-0 w-full">
+      <div className="flex gap-5 justify-center items-center bg-black text-white">
+        <div className="flex justify-center">
+          <Link href="/" className="font-semibold m-3 mt-4 items-center gap-2 ">
+            <AiFillHome className="text-3xl" />
+          </Link>
+        </div>
+        <div className="flex  justify-center">
+          <Link
+            href="/upload"
+            className="font-semibold m-3 mt-4 items-center gap-2 "
+          >
+            <FiPlusSquare className="text-3xl " />
+          </Link>
+        </div>
+        {session?.user ? (
+          <div className="flex ustify-center">
+            <div className="items-center gap-3">
+              <Link
+                href={`/profile/${session?.user._id}`}
+                rel="preload"
+                className="flex gap-2 m-3 mt-4 items-center"
+              >
+                <>
+                  {" "}
+                  <Image
+                    className="cursor-pointer rounded-full "
+                    src={session.user.image}
+                    alt="Profile Picture"
+                    width={30}
+                    height={30}
+                  />
+                </>
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="flex justify-center">
+            {provider && (
+              <Link
+                href="/"
+                className="font-semibold m-3 mt-4 items-center gap-2 "
+              >
+                <FaUserCircle
+                  className="text-3xl"
+                  onClick={() => signIn(provider.google.id.toString())}
+                />
+              </Link>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default MobileBar;

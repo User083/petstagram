@@ -9,6 +9,7 @@ import GalleryCard from "./GalleryCard";
 import Comments from "./Comments";
 import Like from "./Like";
 import PostOptions from "./PostOptions";
+import MobileBar from "./MobileBar";
 
 export {
   Sidebar,
@@ -22,4 +23,5 @@ export {
   Comments,
   Like,
   PostOptions,
+  MobileBar,
 };

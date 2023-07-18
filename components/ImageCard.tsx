@@ -86,7 +86,7 @@ const ImageCard = ({ post }: IProps) => {
   };
 
   return (
-    <div className="flex flex-col border-b-2 border-gray-200 pb-6">
+    <div className="flex flex-col border-b-2 border-gray-200 pb-6 relative z-0">
       <div>
         <div className="flex justify-between items-center">
           <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded items-center">
@@ -157,7 +157,7 @@ const ImageCard = ({ post }: IProps) => {
             <PostOptions
               handleDelete={() => handleDelete(post._id)}
               setShowOptions={setShowOptions}
-              posterId={post.postedBy._id}
+              post={post}
               userId={session?.user._id}
             />
           ) : (

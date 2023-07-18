@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Sidebar } from "@components";
+import { Sidebar, MobileBar } from "@components";
 import Provider from "@components/Provider";
 
 export const metadata: Metadata = {
@@ -17,8 +17,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <div className="p-5 flex w-full justify-center">
               <div className="flex gap-10">
                 <Sidebar />
-
-                <div className="w-full">{children}</div>
+                <div className="w-full z-0">{children}</div>
+                <MobileBar />
               </div>
             </div>
           </main>
