@@ -12,6 +12,7 @@ import Like from "./Like";
 import { useSession } from "next-auth/react";
 import { FiMoreHorizontal } from "react-icons/fi";
 import PostOptions from "./PostOptions";
+import { useRouter } from "next/navigation";
 
 interface IProps {
   post: ImagePost;
@@ -24,13 +25,14 @@ const ImageCard = ({ post }: IProps) => {
   const [isPostingComment, setIsPostingComment] = useState(false);
   const [comment, setComment] = useState("");
   const [showOptions, setShowOptions] = useState(false);
+  const router = useRouter();
 
   const handleDelete = async (postId: string) => {
     try {
       await fetch(`/backend/post/${post._id}`, {
         method: "DELETE",
       }).then((res) => {
-        console.log(res.status);
+        router.refresh();
       });
     } catch (error) {
       console.log(error);
