@@ -184,6 +184,7 @@ const Upload = () => {
                 setAsset(undefined);
                 setCaption("");
                 setCategory(topics[0].name);
+                setWrongFileType(false);
               }}
               type="button"
               className="border-gray-300 p-2 rounded lg:w-44 outline-none w-28 border-2 hover:border-primary"

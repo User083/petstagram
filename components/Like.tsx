@@ -38,14 +38,20 @@ const Like = ({ handleDislike, handleLike, likes, setLikes }: IProps) => {
             }}
           />
         ) : (
-          <IoHeartOutline
-            className="hover:text-primary cursor-pointer text-2xl"
-            onClick={() => {
-              handleLike();
-              setLiked(true);
-              like ? setLikes(likes.length) : setLikes(likes.length + 1);
-            }}
-          />
+          <>
+            {session?.user ? (
+              <IoHeartOutline
+                className="hover:text-primary cursor-pointer text-2xl"
+                onClick={() => {
+                  handleLike();
+                  setLiked(true);
+                  like ? setLikes(likes.length) : setLikes(likes.length + 1);
+                }}
+              />
+            ) : (
+              <IoHeartOutline className="text-2xl" />
+            )}
+          </>
         )}
       </button>
     </>
