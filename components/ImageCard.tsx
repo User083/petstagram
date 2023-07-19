@@ -32,22 +32,8 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
   const [isPostingComment, setIsPostingComment] = useState(false);
   const [comment, setComment] = useState("");
   const [showOptions, setShowOptions] = useState(false);
-  const router = useRouter();
+  const [currentPost, setCurrentPost] = useState(post);
 
-  // const handleDelete = async (postId: string) => {
-  //   try {
-  //     await fetch(`/backend/post/${post._id}`, {
-  //       method: "DELETE",
-  //     }).then(async (res) => {
-  //       const data = await res.json();
-  //       console.log(data, "DELETE REQUEST");
-  //       // data.results[0]
-  //       // gives the removed document
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const handleLike = async (like: boolean) => {
     if (session?.user._id) {
       try {
@@ -85,6 +71,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
           body: JSON.stringify(commentData),
         }).then(async (res) => {
           const data = await res.json();
+          setCurrentPost({ ...post, comments: data.comments });
         });
       } catch (error) {
         console.log(error);
@@ -204,7 +191,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
                   addComment={addComment}
                   comment={comment}
                   setComment={setComment}
-                  comments={post.comments}
+                  comments={currentPost.comments}
                 />
               ) : (
                 <>
