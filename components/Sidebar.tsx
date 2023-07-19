@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { AiFillHome, AiOutlineMenu } from "react-icons/ai";
-import { FiPlusSquare, FiCompass } from "react-icons/fi";
+import { FiPlusSquare, FiCompass, FiMenu } from "react-icons/fi";
 import { ImCancelCircle } from "react-icons/im";
 import { useState, useEffect } from "react";
 import SidebarFooter from "./SidebarFooter";
@@ -11,7 +11,7 @@ import Image from "next/image";
 import { logoB } from "@utils/icons";
 
 const Sidebar = () => {
-  const [isMobile, setIsMobile] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const [provider, setProviders] = useState<any>(null);
   const { data: session } = useSession();
   const fetchProviders = async () => {
@@ -23,11 +23,11 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className="hidden xl:block">
+    <div className="hidden xl:block my-5 mb-20">
       <div className="xl:w-[400px] flex flex-col justify-between mb-10 border-r-2 p-3 min-h-screen px-10 mr-10">
         <div>
           <Link href="/" rel="preload">
-            <div className="flex items-center py-1 pb-3 ">
+            <div className="flex items-center py-1 pb-3 m-3">
               <Image src={logoB} alt="Logo" height={100} width={100} priority />
             </div>
           </Link>
@@ -100,7 +100,43 @@ const Sidebar = () => {
             </>
           )}
         </div>
-        <SidebarFooter />
+        <div className="relative">
+          <button
+            className="w-full flex xl:justify-start justify-center rounded-xl cursor-default "
+            onClick={() => {
+              setShowMenu((prev) => !prev);
+            }}
+          >
+            <p className="font-semibold m-3 mt-4 hidden xl:flex items-center gap-2 hover:text-primary cursor-pointer">
+              <FiMenu className="text-3xl" />
+              More
+            </p>
+          </button>
+
+          <SidebarFooter />
+          {showMenu ? (
+            <div className="py-2 px-2 flex flex-col rounded-xl bg-[#211C1D] absolute  right-0 top-0 max-w-[200px] max-h-[200px]">
+              <>
+                {session?.user._id ? (
+                  <>
+                    <button
+                      onClick={() => {
+                        signOut();
+                      }}
+                      className="text-sm text-white py-2 px-2"
+                    >
+                      Sign out
+                    </button>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );
