@@ -59,8 +59,8 @@ const PostDetail = ({ postDetails }: IProps) => {
           method: "PUT",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(commentData),
-        }).then((res) => {
-          console.log(res.status);
+        }).then(async (res) => {
+          const data = await res.json();
         });
       } catch (error) {
         console.log(error);

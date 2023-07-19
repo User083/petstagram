@@ -18,7 +18,7 @@ export const PUT = async (request: Request, { params }: any) => {
   const { userId, comment, postId } = document;
 
   try {
-    await client
+    const data = await client
       .patch(postId)
       .setIfMissing({ comments: [] })
       .insert("after", "comments[-1]", [
@@ -29,8 +29,9 @@ export const PUT = async (request: Request, { params }: any) => {
         },
       ])
       .commit();
+    console.log(data, "ROUTE DATA");
 
-    return new Response("Comment posted", { status: 201 });
+    return new Response(JSON.stringify(data), { status: 201 });
   } catch (error) {
     return new Response("Failed to post comment", { status: 500 });
   }

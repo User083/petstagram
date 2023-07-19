@@ -64,9 +64,9 @@ const Details = ({ params }: { params: { id: string } }) => {
           method: "PUT",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(commentData),
-        }).then((res) => {
-          console.log(res.status);
-          router.push(`/post/${post?._id}`);
+        }).then(async (res) => {
+          const data = await res.json();
+          setPost({ ...post, comments: data.comments });
         });
       } catch (error) {
         console.log(error);

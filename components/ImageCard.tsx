@@ -73,8 +73,9 @@ const ImageCard = ({ post }: IProps) => {
           method: "PUT",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(commentData),
-        }).then((res) => {
-          console.log(res.status);
+        }).then(async (res) => {
+          const data = await res.json();
+          console.log(data, "IMAGE CARD");
         });
       } catch (error) {
         console.log(error);
