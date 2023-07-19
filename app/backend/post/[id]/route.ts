@@ -29,7 +29,6 @@ export const PUT = async (request: Request, { params }: any) => {
         },
       ])
       .commit();
-    console.log(data, "ROUTE DATA");
 
     return new Response(JSON.stringify(data), { status: 201 });
   } catch (error) {
@@ -39,8 +38,8 @@ export const PUT = async (request: Request, { params }: any) => {
 
 export const DELETE = async (request: Request, { params }: any) => {
   try {
-    await client.delete(params.id);
-    return new Response("Successfully deleted post", { status: 202 });
+    const data = await client.delete(params.id);
+    return new Response(JSON.stringify(data), { status: 202 });
   } catch (error) {
     return new Response("Failed", { status: 500 });
   }

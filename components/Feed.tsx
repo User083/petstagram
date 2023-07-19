@@ -1,19 +1,22 @@
 "use client";
 import { ImageCard, NoResults } from "@/components";
 import { ImagePost } from "@types";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { BiLoaderAlt } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 
 interface IProps {
   posts: ImagePost[];
+  handleDelete: Dispatch<SetStateAction<string>>;
 }
-const PostList = ({ posts }: IProps) => {
+const PostList = ({ posts, handleDelete }: IProps) => {
   return (
     <div className="flex flex-col gap-10 h-full images relative z-0 items-center justify-center">
       {posts.length ? (
-        posts.map((post) => <ImageCard key={post._id} post={post} />)
+        posts.map((post) => (
+          <ImageCard key={post._id} post={post} handleDelete={handleDelete} />
+        ))
       ) : (
         <NoResults text={"No results found"} />
       )}
@@ -27,6 +30,17 @@ const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const handleDelete = async (postId: string) => {
+    try {
+      await fetch(`/backend/post/${postId}`, {
+        method: "DELETE",
+      }).then((res) => {
+        fetchPosts();
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (searchText) {
@@ -70,7 +84,7 @@ const Feed = () => {
           <BiLoaderAlt className="animate-spin text-6xl text-primary" />
         </p>
       ) : (
-        <PostList posts={posts} />
+        <PostList posts={posts} handleDelete={handleDelete} />
       )}
     </section>
   );

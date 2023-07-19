@@ -5,7 +5,13 @@ import Link from "next/link";
 import { ImagePost } from "@types";
 import { MdVerified } from "react-icons/md";
 import { IoChatbubbleOutline } from "react-icons/io5";
-import { useState, useEffect, FormEvent } from "react";
+import {
+  useState,
+  useEffect,
+  FormEvent,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { topics } from "@utils/constants";
 import Comments from "./Comments";
 import Like from "./Like";
@@ -16,9 +22,10 @@ import { useRouter } from "next/navigation";
 
 interface IProps {
   post: ImagePost;
+  handleDelete: Dispatch<SetStateAction<string>>;
 }
 
-const ImageCard = ({ post }: IProps) => {
+const ImageCard = ({ post, handleDelete }: IProps) => {
   const { data: session } = useSession();
   const [likes, setLikes] = useState(post.likes.length);
   const [viewComments, setViewComments] = useState(false);
@@ -27,17 +34,20 @@ const ImageCard = ({ post }: IProps) => {
   const [showOptions, setShowOptions] = useState(false);
   const router = useRouter();
 
-  const handleDelete = async (postId: string) => {
-    try {
-      await fetch(`/backend/post/${post._id}`, {
-        method: "DELETE",
-      }).then((res) => {
-        router.refresh();
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleDelete = async (postId: string) => {
+  //   try {
+  //     await fetch(`/backend/post/${post._id}`, {
+  //       method: "DELETE",
+  //     }).then(async (res) => {
+  //       const data = await res.json();
+  //       console.log(data, "DELETE REQUEST");
+  //       // data.results[0]
+  //       // gives the removed document
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const handleLike = async (like: boolean) => {
     if (session?.user._id) {
       try {
@@ -75,7 +85,6 @@ const ImageCard = ({ post }: IProps) => {
           body: JSON.stringify(commentData),
         }).then(async (res) => {
           const data = await res.json();
-          console.log(data, "IMAGE CARD");
         });
       } catch (error) {
         console.log(error);
