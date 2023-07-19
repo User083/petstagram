@@ -15,7 +15,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Provider>
           <main>
             <div className="p-5 w-screen">
-              <div className="flex gap-10 justify-between">
+              <div className="flex lg:gap-10 justify-between">
                 <div>
                   <Sidebar />
                 </div>

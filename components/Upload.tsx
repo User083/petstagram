@@ -88,8 +88,8 @@ const Upload = () => {
     }
   };
   return (
-    <div className="flex w-full h-full absolute left-0 top-[60px] pt-10 mt-10 lg:pt-20 justify-center bg-gray-200 z-0">
-      <div className="rounded-lg flex items-center justify-center p-14 flex-wrap gap-6 xl:h-[80vh] w-[60%] bg-white">
+    <div className="flex w-full h-full min-h-screen pt-10 lg:pt-20 justify-center bg-gray-200 z-0">
+      <div className="rounded-lg flex items-center justify-center lg:p-14 flex-wrap gap-3 xl:h-[100vh] 2xl:h-[80vh] 2xl:w-[60%] w-full sm:w-[80%] bg-white mb-20">
         <div>
           <p className="text-2xl font-bold">Upload Image</p>
           <p className="text-md text-gray-400 mt-1">Post a new image</p>
@@ -118,12 +118,11 @@ const Upload = () => {
                         <p className="text-xl font-bold">Upload Image</p>
                       </div>
                       <p className="text-sm leading-10 mt-10 text-gray-400 text-center">
-                        JPG or PNG
+                        JPG, PNG, GIF
                         <br />
-                        1:1 aspect for best result <br />
-                        up to 20mb
+                        <br />
                       </p>
-                      <p className="text-center rounded mt-10 font-medium p-2 outline-none w-52 bg-primary text-white">
+                      <p className="text-center rounded mt-10 font-medium p-2 outline-none w-52 bg-primary text-white hidden lg:block">
                         Select File
                       </p>
                     </div>
