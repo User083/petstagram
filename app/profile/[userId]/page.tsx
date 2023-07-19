@@ -20,6 +20,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
   const { data: session } = useSession();
   const [showUserPosts, setShowUserPosts] = useState<Boolean>(true);
   const [postList, setPostList] = useState<ImagePost[]>([]);
+  const [showOptions, setShowOptions] = useState(false);
   const posts = showUserPosts ? "border-b-2 border-black" : "text-gray-400";
   const liked = !showUserPosts ? "border-b-2 border-black" : "text-gray-400";
   const [data, setData] = useState<IProps>({
@@ -50,8 +51,8 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
     fetchPosts();
   }, [showUserPosts, data.userLikedPosts, data.userPosts]);
   return (
-    <div className="sm:w-full w-[700px] mt-10">
-      <div className="flex items-center justify-between w-full">
+    <div className="sm:w-full m-10">
+      <div className="flex items-center justify-between w-full relative">
         <div className="flex gap-6 md:gap-10 mb-4 bg-white w-full items-center">
           <div className="w-16 h-16 md:w-32 md:h-32">
             <Image
@@ -71,19 +72,48 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
             <p className="text-sm font-medium"> {data.user.userName}</p>
           </div>
         </div>
-        <FiMoreHorizontal />
-        {session?.user._id === data.user._id ? (
-          <button
+        <div className="relative">
+          <FiMoreHorizontal
+            className="text-2xl cursor-pointer hover:text-primary"
             onClick={() => {
-              signOut();
+              setShowOptions((prev) => !prev);
             }}
-            className="text-sm text-white py-2 px-2 m-3 hover:bg-primary w-[100px] bg-gray-200 rounded"
-          >
-            Sign out
-          </button>
-        ) : (
-          <></>
-        )}
+          />
+          {showOptions ? (
+            <div className="py-2 px-2 flex flex-col rounded-xl bg-[#211C1D] absolute right-0 min-w-[200px]">
+              <>
+                {session?.user._id === data.user._id ? (
+                  <>
+                    <button
+                      onClick={() => {}}
+                      className="text-sm text-white py-2 px-2"
+                    >
+                      Edit Profile
+                    </button>{" "}
+                    <button
+                      onClick={() => {
+                        signOut();
+                      }}
+                      className="text-sm text-white py-2 px-2"
+                    >
+                      Sign out
+                    </button>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </>
+              <button
+                onClick={() => {}}
+                className="text-sm text-white py-2 px-2"
+              >
+                Follow
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
       <div>
         <div className="flex gap-10 mb-10 mt-10 border-b-2 border-gray-200 bg-white w-full">
