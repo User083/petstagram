@@ -33,6 +33,7 @@ const Upload = () => {
     ];
     if (fileTypes.includes(selectedFile.type)) {
       setIsLoading(true);
+      setWrongFileType(false);
       client.assets
         .upload("image", selectedFile, {
           contentType: selectedFile.type,
@@ -40,6 +41,7 @@ const Upload = () => {
         })
         .then((data) => {
           setAsset(data);
+
           setIsLoading(false);
         });
     } else {
