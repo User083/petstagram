@@ -81,7 +81,7 @@ const PostDetail = ({ postDetails }: IProps) => {
               </p>
             </div>
             <div className="relative">
-              <div className="lg:h-[100vh] h-[60vh]">
+              <div className="lg:h-[100vh] h-[80vh]">
                 <Image
                   alt={post.caption}
                   src={post?.image?.asset.url}

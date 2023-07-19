@@ -86,9 +86,9 @@ const ImageCard = ({ post }: IProps) => {
   };
 
   return (
-    <div className="flex flex-col border-b-2 border-gray-200 pb-6 relative z-0">
+    <div className="flex flex-col border-b-2 border-gray-200 pb-6 relative z-0 w-[450px] md:w-[600px] lg:w-[800px] items-center justify-center">
       <div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center w-[350px] md:w-[500px] lg:w-[700px]">
           <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded items-center">
             <div className="md:w-16 md:h-16 w-10 h-10">
               <Link href={`/profile/${post.postedBy._id}`}>

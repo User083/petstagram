@@ -24,10 +24,10 @@ const Sidebar = () => {
 
   return (
     <div className="hidden xl:block">
-      <div className="xl:w-[400px] flex flex-col justify-between mb-10 border-r-2 xl:border-0 p-3 min-h-screen ml-10 pl-10">
+      <div className="xl:w-[400px] flex flex-col justify-between mb-10 border-r-2 p-3 min-h-screen px-10 mr-10">
         <div>
           <Link href="/" rel="preload">
-            <div className="flex items-center justify-center py-1 pb-3 ">
+            <div className="flex items-center py-1 pb-3 ">
               <Image src={logoB} alt="Logo" height={100} width={100} priority />
             </div>
           </Link>

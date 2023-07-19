@@ -11,7 +11,7 @@ interface IProps {
 }
 const PostList = ({ posts }: IProps) => {
   return (
-    <div className="flex flex-col gap-10 h-full images relative z-0">
+    <div className="flex flex-col gap-10 h-full images relative z-0 items-center justify-center">
       {posts.length ? (
         posts.map((post) => <ImageCard key={post._id} post={post} />)
       ) : (

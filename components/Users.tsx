@@ -18,7 +18,7 @@ const Users = () => {
     getUsers();
   }, []);
   return (
-    <div className="hidden xl:flex m-10">
+    <div className="hidden xl:flex m-10 min-w-[400px]">
       <div className="flex flex-col gap-5">
         <div>
           {session?.user ? (
@@ -54,19 +54,31 @@ const Users = () => {
           <h1 className="text-sm text-gray-400 font-semibold">
             Suggested for you
           </h1>
-          <div className="flex gap-2 py-2">
+          <div className="flex gap-2 py-2 flex-col">
             {users.map((user) => (
-              <Link href={`/profile/${user._id}`}>
+              <Link
+                href={`/profile/${user._id}`}
+                className="flex gap-1 items-center"
+              >
                 <>
                   <Image
                     key={user._id}
                     src={user.profilePicture}
                     alt="User"
-                    width={60}
-                    height={60}
+                    width={52}
+                    height={52}
                     className="rounded-full border-[1px] border-gray-200 hover:opacity-50 hover:border-highlight hover:cursor-pointer"
                   />
                 </>
+                <div className="flex flex-col">
+                  <p className="font-semibold text-sm flex gap-1 items-center">
+                    {user.userName}{" "}
+                    <MdVerified className="text-blue-400 text-md" />
+                  </p>
+                  <p className="text-sm text-gray-400">
+                    Followed by jimmyhendrix
+                  </p>
+                </div>
               </Link>
             ))}
           </div>

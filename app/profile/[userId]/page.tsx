@@ -6,6 +6,7 @@ import Image from "next/image";
 import { MdVerified } from "react-icons/md";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { FiMoreHorizontal } from "react-icons/fi";
 
 interface IProps {
   data: {
@@ -49,7 +50,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
     fetchPosts();
   }, [showUserPosts, data.userLikedPosts, data.userPosts]);
   return (
-    <div className="w-full mt-10">
+    <div className="sm:w-full w-[700px] mt-10">
       <div className="flex items-center justify-between w-full">
         <div className="flex gap-6 md:gap-10 mb-4 bg-white w-full items-center">
           <div className="w-16 h-16 md:w-32 md:h-32">
@@ -70,6 +71,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
             <p className="text-sm font-medium"> {data.user.userName}</p>
           </div>
         </div>
+        <FiMoreHorizontal />
         {session?.user._id === data.user._id ? (
           <button
             onClick={() => {
