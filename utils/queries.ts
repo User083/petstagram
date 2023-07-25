@@ -113,6 +113,7 @@ export const allUsersQuery = () => {
     _id,
      userName,
       profilePicture,
+      followers
   }`;
 
   return query;

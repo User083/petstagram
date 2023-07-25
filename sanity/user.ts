@@ -3,6 +3,7 @@ export default {
   name: "user",
   title: "User",
   type: "document",
+
   fields: [
     {
       name: "userName",
@@ -23,6 +24,17 @@ export default {
       name: "id",
       title: "userID",
       type: "string",
+    },
+    {
+      name: "followers",
+      title: "Followers",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "user" }],
+        },
+      ],
     },
   ],
 };

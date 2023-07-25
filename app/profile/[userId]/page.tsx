@@ -18,6 +18,7 @@ interface IProps {
 
 const MyProfile = ({ params }: { params: { userId: string } }) => {
   const { data: session } = useSession();
+  const [following, setFollowing] = useState<boolean>();
   const [isLoading, setIsLoading] = useState(false);
   const [showUserPosts, setShowUserPosts] = useState<Boolean>(true);
   const [postList, setPostList] = useState<ImagePost[]>([]);
@@ -25,7 +26,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
   const posts = showUserPosts ? "border-b-2 border-black" : "text-gray-400";
   const liked = !showUserPosts ? "border-b-2 border-black" : "text-gray-400";
   const [data, setData] = useState<IProps>({
-    user: { _id: "", userName: "", profilePicture: "" },
+    user: { _id: "", userName: "", profilePicture: "", followers: [] },
     userPosts: [],
     userLikedPosts: [],
   });
@@ -51,8 +52,35 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
     }
   };
 
+  const handleFollow = async (follower: boolean) => {
+    if (session?.user._id) {
+      try {
+        const followerData = {
+          followerId: session.user._id,
+          follower,
+        };
+
+        await fetch(`/backend/users/${params.userId}`, {
+          method: "PUT",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(followerData),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  const filterFollowers = data.user.followers?.filter(
+    (item) => item._key === session?.user._id
+  );
   useEffect(() => {
     getProfile(params.userId);
+
+    if (filterFollowers?.length > 0) {
+      setFollowing(true);
+    } else {
+      setFollowing(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -84,19 +112,26 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
               </div>
             </div>
             <div className="relative">
-              <FiMoreHorizontal
-                className="text-2xl cursor-pointer hover:text-primary"
-                onClick={() => {
-                  setShowOptions((prev) => !prev);
-                }}
-              />
+              {session?.user ? (
+                <FiMoreHorizontal
+                  className="text-2xl cursor-pointer hover:text-primary"
+                  onClick={() => {
+                    setShowOptions((prev) => !prev);
+                  }}
+                />
+              ) : (
+                <></>
+              )}
+
               {showOptions ? (
                 <div className="py-2 px-2 flex flex-col rounded-xl bg-[#211C1D] absolute right-0 min-w-[200px]">
                   <>
                     {session?.user._id === data.user._id ? (
                       <>
                         <button
-                          onClick={() => {}}
+                          onClick={() => {
+                            setShowOptions(false);
+                          }}
                           className="text-sm text-white py-2 px-2"
                         >
                           Edit Profile
@@ -104,6 +139,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
                         <button
                           onClick={() => {
                             signOut();
+                            setShowOptions(false);
                           }}
                           className="text-sm text-white py-2 px-2"
                         >
@@ -111,15 +147,34 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
                         </button>
                       </>
                     ) : (
-                      <></>
+                      <>
+                        {" "}
+                        {following ? (
+                          <button
+                            onClick={() => {
+                              handleFollow(false);
+                              setFollowing(false);
+                              setShowOptions(false);
+                            }}
+                            className="text-sm text-white py-2 px-2"
+                          >
+                            Unfollow
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              handleFollow(true);
+                              setFollowing(true);
+                              setShowOptions(false);
+                            }}
+                            className="text-sm text-white py-2 px-2"
+                          >
+                            Follow
+                          </button>
+                        )}
+                      </>
                     )}
                   </>
-                  <button
-                    onClick={() => {}}
-                    className="text-sm text-white py-2 px-2"
-                  >
-                    Follow
-                  </button>
                 </div>
               ) : (
                 <></>

@@ -23,6 +23,7 @@ export interface IUser {
   userName: string;
   profilePicture: string;
   email: string;
+  followers: Array;
 }
 
 export interface ISession {

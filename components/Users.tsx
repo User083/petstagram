@@ -1,28 +1,72 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useSession, getProviders } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { MdVerified } from "react-icons/md";
 import Loader from "./Loader";
+import { IUser } from "@types";
+
+interface IProps {
+  user: IUser;
+}
+
+const UserCard = ({ user }: IProps) => {
+  // const getUser = async (userId: string) => {
+  //   try {
+  //     await fetch(`/backend/users/${userId}`).then(async (res) => {
+  //       const data = await res.json();
+  //       return setFollower(data.userName);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // const [follower, setFollower] = useState("");
+  // useEffect(() => {
+  //   console.log(user.followers);
+  //   if (user.followers.length > 0) getUser(user.followers[0]._key);
+  // }, []);
+  return (
+    <Link href={`/profile/${user._id}`} className="flex gap-1 items-center">
+      <>
+        <Image
+          src={user.profilePicture}
+          alt="User"
+          width={52}
+          height={52}
+          className="rounded-full border-[1px] border-gray-200 hover:opacity-50 hover:border-highlight hover:cursor-pointer"
+        />
+      </>
+      <div className="flex flex-col">
+        <p className="font-semibold text-sm flex gap-1 items-center">
+          {user.userName} <MdVerified className="text-blue-400 text-md" />
+        </p>
+
+        <p className="text-sm text-gray-400">Followed by NovaTurient</p>
+      </div>
+    </Link>
+  );
+};
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<IUser[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { data: session } = useSession();
 
   const getUsers = async () => {
     setIsLoading(true);
     try {
-      await fetch("/backend/users").then(async (res) =>
-        setUsers(await res.json())
-      );
+      await fetch("/backend/users").then(async (res) => {
+        setUsers(await res.json());
+      });
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -68,30 +112,7 @@ const Users = () => {
               </h1>
               <div className="flex gap-2 py-2 flex-col">
                 {users.map((user) => (
-                  <Link
-                    href={`/profile/${user._id}`}
-                    className="flex gap-1 items-center"
-                  >
-                    <>
-                      <Image
-                        key={user._id}
-                        src={user.profilePicture}
-                        alt="User"
-                        width={52}
-                        height={52}
-                        className="rounded-full border-[1px] border-gray-200 hover:opacity-50 hover:border-highlight hover:cursor-pointer"
-                      />
-                    </>
-                    <div className="flex flex-col">
-                      <p className="font-semibold text-sm flex gap-1 items-center">
-                        {user.userName}{" "}
-                        <MdVerified className="text-blue-400 text-md" />
-                      </p>
-                      <p className="text-sm text-gray-400">
-                        Followed by jimmyhendrix
-                      </p>
-                    </div>
-                  </Link>
+                  <UserCard user={user} key={user._id} />
                 ))}
               </div>
             </section>
