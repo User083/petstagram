@@ -28,7 +28,11 @@ const UserCard = ({ user }: IProps) => {
   //   if (user.followers.length > 0) getUser(user.followers[0]._key);
   // }, []);
   return (
-    <Link href={`/profile/${user._id}`} className="flex gap-1 items-center">
+    <Link
+      href={`/profile/${user._id}`}
+      className="flex gap-1 items-center"
+      aria-label="View User Profile"
+    >
       <>
         <Image
           src={user.profilePicture}
@@ -84,6 +88,7 @@ const Users = () => {
                       href={`/profile/${session?.user._id}`}
                       rel="preload"
                       className="w-[50px] h-auto"
+                      aria-label="View Own Profile"
                     >
                       <>
                         {" "}

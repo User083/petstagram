@@ -21,7 +21,11 @@ const MobileBar = () => {
     <nav className="bottom-0 left-0 fixed m-0 w-full">
       <div className="flex gap-5 justify-center items-center bg-black text-white">
         <div className="flex justify-center">
-          <Link href="/" className="font-semibold m-3 mt-4 items-center gap-2 ">
+          <Link
+            href="/"
+            className="font-semibold m-3 mt-4 items-center gap-2 "
+            aria-label="Home"
+          >
             <AiFillHome className="text-3xl" />
           </Link>
         </div>
@@ -29,6 +33,7 @@ const MobileBar = () => {
           <Link
             href="/upload"
             className="font-semibold m-3 mt-4 items-center gap-2 "
+            aria-label="Upload new post"
           >
             <FiPlusSquare className="text-3xl " />
           </Link>
@@ -40,6 +45,7 @@ const MobileBar = () => {
                 href={`/profile/${session?.user._id}`}
                 rel="preload"
                 className="flex gap-2 m-3 mt-4 items-center"
+                aria-label="View Profile"
               >
                 <>
                   {" "}
@@ -60,6 +66,7 @@ const MobileBar = () => {
               <Link
                 href="/"
                 className="font-semibold m-3 mt-4 items-center gap-2 "
+                aria-label="Sign in"
               >
                 <FaUserCircle
                   className="text-3xl"

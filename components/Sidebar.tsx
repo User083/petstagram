@@ -29,7 +29,7 @@ const Sidebar = () => {
     <aside className="hidden xl:block my-5 mb-20">
       <div className="xl:w-[400px] flex flex-col justify-between mb-10 border-r-2 p-3 px-10">
         <nav>
-          <Link href="/" rel="preload">
+          <Link href="/" aria-label="Home logo">
             <div className="flex items-center py-1 pb-3 m-3">
               <Image
                 src={logoB}
@@ -44,6 +44,7 @@ const Sidebar = () => {
             <Link
               href="/"
               className="font-semibold m-3 mt-4 hidden xl:flex items-center gap-2 "
+              aria-label="Home"
             >
               <AiFillHome className="text-3xl" />
               Home
@@ -52,17 +53,12 @@ const Sidebar = () => {
 
           <div className=" w-full flex xl:justify-start justify-center hover:bg-gray-200 rounded-xl">
             <Link
+              aria-label="Upload"
               href="/upload"
               className="font-semibold m-3 mt-4 hidden xl:flex items-center gap-2 "
             >
               <FiPlusSquare className="text-3xl " />
               Create
-            </Link>
-            <Link
-              href="/upload"
-              className="font-bold text-3xl xl:text-md block xl:hidden"
-            >
-              <FiPlusSquare className="hover:text-primary m-3 mt-4" />
             </Link>
           </div>
           {/* <Discover /> */}
@@ -70,6 +66,7 @@ const Sidebar = () => {
             <div className="w-full flex xl:justify-start justify-center  hover:bg-gray-200 rounded-xl">
               <div className="xl:flex items-center gap-3">
                 <Link
+                  aria-label="View profile"
                   href={`/profile/${session?.user._id}`}
                   rel="preload"
                   className="flex gap-2 m-3 mt-4 items-center"
@@ -93,10 +90,11 @@ const Sidebar = () => {
           ) : (
             <>
               {provider && (
-                <div className="px-2 py-4 hidden xl:block">
+                <span className="px-2 py-4 hidden xl:block">
                   <p className="text-gray-400">Log in to like and comment</p>
                   <div className="pr-4">
                     <button
+                      name="Log in with Google"
                       className="bg-primary text-lg text-white border-[1px] font-semibold px-6 py-3 rounded-md outline-none w-full mt-3 hover:bg-highlight cursor-pointer
                   "
                       onClick={() => signIn(provider.google.id.toString())}
@@ -104,7 +102,7 @@ const Sidebar = () => {
                       Log In with {provider.google.id}
                     </button>
                   </div>
-                </div>
+                </span>
               )}
             </>
           )}
@@ -129,6 +127,7 @@ const Sidebar = () => {
                 {session?.user._id ? (
                   <>
                     <button
+                      name="Sign out"
                       onClick={() => {
                         signOut();
                       }}

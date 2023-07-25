@@ -93,9 +93,13 @@ const Details = ({ params }: { params: { id: string } }) => {
         <article className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap h-full min-h-screen">
           <section className="relative flex-2 w-full lg:w-9/12 flex justify-center items-center bg-black">
             <div className="opacity-90 absolute top-6 left-2 lg:left-6 flex gap-6 z-50">
-              <p className="cursor-pointer " onClick={() => router.back()}>
+              <button
+                className="cursor-pointer "
+                onClick={() => router.back()}
+                name="Cancel"
+              >
                 <MdOutlineCancel className="text-white text-[35px] hover:opacity-90" />
-              </p>
+              </button>
             </div>
 
             <div className="relative lg:h-[100vh] h-[80vh] w-[300px] md:w-[900px] lg:w-[1200px]">
@@ -110,7 +114,10 @@ const Details = ({ params }: { params: { id: string } }) => {
           </section>
           <section className="relative w-[1000px] md:w-[900px] lg:w-[600px]">
             <div className="lg:mt-20 mt-10">
-              <Link href={`/profile/${post.postedBy._id}`}>
+              <Link
+                href={`/profile/${post.postedBy._id}`}
+                aria-label="View User Profile"
+              >
                 <span className="flex gap-4 mb-4 w-full pl-10">
                   <Image
                     width={60}

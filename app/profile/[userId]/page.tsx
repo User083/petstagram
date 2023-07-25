@@ -92,7 +92,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
       {!isLoading && (
         <>
           <section className="flex items-center justify-between w-full relative">
-            <div className="flex gap-6 md:gap-10 mb-4 bg-white w-full items-center">
+            <span className="flex gap-6 md:gap-10 mb-4 bg-white w-full items-center">
               <div className="w-16 h-16 md:w-32 md:h-32">
                 <Image
                   width={120}
@@ -110,7 +110,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
                 </div>
                 <p className="text-sm font-medium"> {data.user.userName}</p>
               </div>
-            </div>
+            </span>
             <div className="relative">
               {session?.user ? (
                 <FiMoreHorizontal
@@ -132,6 +132,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
                           onClick={() => {
                             setShowOptions(false);
                           }}
+                          name="Edit Profile"
                           className="text-sm text-white py-2 px-2"
                         >
                           Edit Profile
@@ -142,6 +143,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
                             setShowOptions(false);
                           }}
                           className="text-sm text-white py-2 px-2"
+                          name="Sign out"
                         >
                           Sign out
                         </button>
@@ -156,6 +158,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
                               setFollowing(false);
                               setShowOptions(false);
                             }}
+                            name="Unfollow"
                             className="text-sm text-white py-2 px-2"
                           >
                             Unfollow
@@ -168,6 +171,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
                               setShowOptions(false);
                             }}
                             className="text-sm text-white py-2 px-2"
+                            name="Follow"
                           >
                             Follow
                           </button>

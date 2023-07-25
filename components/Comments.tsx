@@ -88,7 +88,7 @@ const Comments = ({
   const { data: session } = useSession();
 
   return (
-    <div className="border-t-2 border-gray-200 pt-4 pb-[100px]">
+    <article className="border-t-2 border-gray-200 pt-4 pb-[100px]">
       <div className="">
         {comments?.length ? (
           <div>
@@ -118,13 +118,14 @@ const Comments = ({
             <button
               className="text-sm font-semibold text-gray-500 hover:text-primary"
               onClick={addComment}
+              name="Add comment"
             >
               {isPostingComment ? "Posting..." : "Post"}
             </button>
           </form>
         </div>
       )}
-    </div>
+    </article>
   );
 };
 

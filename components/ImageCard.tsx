@@ -91,6 +91,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
               href={`/profile/${post.postedBy._id}`}
               prefetch={false}
               as={`/profile/${post.postedBy._id}`}
+              aria-label="View poster profile"
             >
               <div className="md:w-16 md:h-16 w-10 h-10">
                 <>
@@ -105,7 +106,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
               </div>
             </Link>
             <div>
-              <Link href="/">
+              <Link href="/" aria-label="View poster profile">
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1">
                     <p className="flex items-center md:text-md font-bold text-primary">
@@ -145,6 +146,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
                 : `relative pointer-events-auto`
             }
             prefetch={false}
+            aria-label="View post details"
           >
             <div className="relative bg-gray-100 cursor-pointer rounded w-[250px] md:w-[400px] lg:h-[800px] md:h-[600px] lg:w-[600px] h-[300px] object-cover">
               <Image
@@ -152,6 +154,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
                 alt="Image Post"
                 fill
                 objectFit="cover"
+                priority={true}
               />
             </div>
           </Link>{" "}
@@ -202,7 +205,11 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
                 <>
                   {" "}
                   {post.comments.length > 0 ? (
-                    <Link href={`/post/${post._id}`} className="flex px-2 py-1">
+                    <Link
+                      href={`/post/${post._id}`}
+                      className="flex px-2 py-1"
+                      aria-label="View all comments"
+                    >
                       <p className="text-sm text-gray-400">
                         View all {post.comments.length} comments
                       </p>{" "}
@@ -219,6 +226,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
               {topics.map((topic) =>
                 topic.name === post.topic ? (
                   <Link
+                    aria-label={`Sort by ${topic.name}`}
                     href={`/?topic=${topic.name}`}
                     key={topic.name}
                     className=" group"

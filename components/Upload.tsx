@@ -181,6 +181,7 @@ const Upload = () => {
                   onClick={handlePost}
                   type="button"
                   className=" p-2 rounded lg:w-44 outline-none w-28 bg-primary text-white"
+                  name="Upload"
                 >
                   Upload
                 </button>
@@ -193,6 +194,7 @@ const Upload = () => {
                   }}
                   type="button"
                   className="border-gray-300 p-2 rounded lg:w-44 outline-none w-28 border-2 hover:border-primary"
+                  name="Discard"
                 >
                   Discard
                 </button>
