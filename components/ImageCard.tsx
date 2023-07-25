@@ -83,11 +83,15 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
   };
 
   return (
-    <div className="flex flex-col border-b-2 border-gray-200 pb-6 relative z-0 w-[250px] md:w-[400px] lg:w-[700px]">
-      <div>
-        <div className="flex justify-between items-center">
+    <article className="flex flex-col border-b-2 border-gray-200 pb-6 relative z-0 w-[250px] md:w-[400px] lg:w-[700px]">
+      <section>
+        <span className="flex justify-between items-center">
           <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded items-center">
-            <Link href={`/profile/${post.postedBy._id}`}>
+            <Link
+              href={`/profile/${post.postedBy._id}`}
+              prefetch={false}
+              as={`/profile/${post.postedBy._id}`}
+            >
               <div className="md:w-16 md:h-16 w-10 h-10">
                 <>
                   <Image
@@ -127,18 +131,20 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
               }}
             />
           </div>
-        </div>
-      </div>
+        </span>
+      </section>
 
-      <div className="lg:ml-20 flex gap-4 ">
+      <section className="lg:ml-20 flex gap-4 ">
         <div className="rounded-3xl relative ">
           <Link
             href={`/post/${post._id}`}
+            as={`/post/${post._id}`}
             className={
               showOptions
                 ? `relative pointer-events-none `
                 : `relative pointer-events-auto`
             }
+            prefetch={false}
           >
             <div className="relative bg-gray-100 cursor-pointer rounded w-[250px] md:w-[400px] lg:h-[800px] md:h-[600px] lg:w-[600px] h-[300px] object-cover">
               <Image
@@ -231,8 +237,8 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </article>
   );
 };
 export default ImageCard;

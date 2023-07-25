@@ -15,20 +15,29 @@ const Sidebar = () => {
   const [provider, setProviders] = useState<any>(null);
   const { data: session } = useSession();
   const fetchProviders = async () => {
-    const response = await getProviders();
-    setProviders(response);
+    try {
+      setProviders(await getProviders());
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     fetchProviders();
   }, []);
 
   return (
-    <div className="hidden xl:block my-5 mb-20">
-      <div className="xl:w-[400px] flex flex-col justify-between mb-10 border-r-2 p-3 min-h-screen px-10">
-        <div>
+    <aside className="hidden xl:block my-5 mb-20">
+      <div className="xl:w-[400px] flex flex-col justify-between mb-10 border-r-2 p-3 px-10">
+        <nav>
           <Link href="/" rel="preload">
             <div className="flex items-center py-1 pb-3 m-3">
-              <Image src={logoB} alt="Logo" height={100} width={100} priority />
+              <Image
+                src={logoB}
+                alt="Logo"
+                height={100}
+                width={100}
+                priority={false}
+              />
             </div>
           </Link>
           <div className="w-full flex xl:justify-start justify-center  hover:bg-gray-200 rounded-xl">
@@ -99,8 +108,8 @@ const Sidebar = () => {
               )}
             </>
           )}
-        </div>
-        <div className="relative">
+        </nav>
+        <section className="relative mt-20">
           <button
             className="w-full flex xl:justify-start justify-center rounded-xl cursor-default "
             onClick={() => {
@@ -136,9 +145,9 @@ const Sidebar = () => {
           ) : (
             <></>
           )}
-        </div>
+        </section>
       </div>
-    </div>
+    </aside>
   );
 };
 

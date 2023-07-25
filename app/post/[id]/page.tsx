@@ -3,10 +3,11 @@ import React, { useState, FormEvent, useEffect } from "react";
 import Image from "next/image";
 import { MdOutlineCancel } from "react-icons/md";
 import { ImagePost } from "@types";
-import { Comments, Like } from "@components";
+import { Comments, Like, Loader } from "@components";
 import { useSession } from "next-auth/react";
 import { MdVerified } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Details = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
@@ -15,10 +16,19 @@ const Details = ({ params }: { params: { id: string } }) => {
   const [isPostingComment, setIsPostingComment] = useState<boolean>(false);
   const [comment, setComment] = useState<string>("");
   const [likes, setLikes] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const fetchData = async (id: string) => {
-    const res = await fetch(`/backend/post/${params.id}`);
-    const data = await res.json();
-    setPost(data[0]);
+    setIsLoading(true);
+    try {
+      const data = await fetch(`/backend/post/${params.id}`).then(
+        async (res) => await res.json()
+      );
+      setPost(data[0]);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -78,51 +88,54 @@ const Details = ({ params }: { params: { id: string } }) => {
   };
   return (
     <>
-      {post && (
-        <div className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap h-full min-h-screen">
-          <div className="relative flex-2 w-full lg:w-9/12 flex justify-center items-center bg-black bg-no-repeat bg-cover">
+      {isLoading && <Loader />}
+      {post && !isLoading && (
+        <article className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap h-full min-h-screen">
+          <section className="relative flex-2 w-full lg:w-9/12 flex justify-center items-center bg-black">
             <div className="opacity-90 absolute top-6 left-2 lg:left-6 flex gap-6 z-50">
               <p className="cursor-pointer " onClick={() => router.back()}>
                 <MdOutlineCancel className="text-white text-[35px] hover:opacity-90" />
               </p>
             </div>
-            <div className="relative">
-              <div className="lg:h-[100vh] h-[60vh]">
-                <Image
-                  alt={post.caption}
-                  src={post?.image?.asset.url}
-                  className=" h-full w-full"
-                  width={800}
-                  height={800}
-                />
-              </div>
+
+            <div className="relative lg:h-[100vh] h-[80vh] w-[300px] md:w-[900px] lg:w-[1200px]">
+              <Image
+                alt={post.caption}
+                src={post?.image?.asset.url}
+                style={{ objectFit: "contain" }}
+                fill={true}
+                priority={true}
+              />
             </div>
-          </div>
-          <div className="relative w-[1000px] md:w-[900px] lg:w-[700px]">
+          </section>
+          <section className="relative w-[1000px] md:w-[900px] lg:w-[600px]">
             <div className="lg:mt-20 mt-10">
-              <div className="flex gap-4 mb-4 bg-white w-full pl-10">
-                <Image
-                  width={60}
-                  height={60}
-                  alt="user-profile"
-                  className="rounded-full"
-                  src={post.postedBy.profilePicture}
-                />
-                <div>
-                  <div className="text-xl font-bold lowercase tracking-wider flex gap-2 items-center justify-center">
-                    {post.postedBy.userName.replace(/\s+/g, "")}{" "}
-                    <MdVerified className="text-blue-400 text-xl" />
+              <Link href={`/profile/${post.postedBy._id}`}>
+                <span className="flex gap-4 mb-4 w-full pl-10">
+                  <Image
+                    width={60}
+                    height={60}
+                    alt="user-profile"
+                    className="rounded-full"
+                    src={post.postedBy.profilePicture}
+                    priority={false}
+                  />
+                  <div>
+                    <div className="text-xl font-bold lowercase tracking-wider flex gap-2 items-center justify-center">
+                      {post.postedBy.userName.replace(/\s+/g, "")}{" "}
+                      <MdVerified className="text-blue-400 text-xl" />
+                    </div>
+                    <p className="text-md"> {post.postedBy.userName}</p>
                   </div>
-                  <p className="text-md"> {post.postedBy.userName}</p>
-                </div>
-              </div>
+                </span>
+              </Link>
 
               <div className="px-10">
                 <p className=" text-md text-gray-600">{post.caption}</p>
               </div>
               <div className="mt-5 px-10">
                 {session?.user._id && (
-                  <div className="flex gap-2 items-center">
+                  <span className="flex gap-2 items-center">
                     <Like
                       likes={post.likes}
                       setLikes={setLikes}
@@ -130,9 +143,9 @@ const Details = ({ params }: { params: { id: string } }) => {
                       handleDislike={() => handleLike(false)}
                     />
                     <p className="text-sm font-semibold">{likes} likes</p>
-                  </div>
+                  </span>
                 )}
-                <div className="mt-2">
+                <section className="mt-2">
                   <Comments
                     comment={comment}
                     setComment={setComment}
@@ -140,11 +153,11 @@ const Details = ({ params }: { params: { id: string } }) => {
                     comments={post.comments}
                     isPostingComment={isPostingComment}
                   />
-                </div>
+                </section>
               </div>
             </div>
-          </div>
-        </div>
+          </section>
+        </article>
       )}
     </>
   );

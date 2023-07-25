@@ -8,14 +8,14 @@ interface IProps {
 
 const GalleryCard = ({ post }: IProps) => {
   return (
-    <div className="group relative hover:cursor">
+    <div className="group relative hover:cursor h-[300px] w-[300px]">
       <>
         {" "}
         <Image
           src={post.image.asset.url}
           alt={post.caption}
-          width={300}
-          height={300}
+          objectFit="cover"
+          fill={true}
         />{" "}
       </>
 

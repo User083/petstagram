@@ -18,7 +18,7 @@ const MobileBar = () => {
     fetchProviders();
   }, []);
   return (
-    <div className="bottom-0 left-0 fixed m-0 w-full">
+    <nav className="bottom-0 left-0 fixed m-0 w-full">
       <div className="flex gap-5 justify-center items-center bg-black text-white">
         <div className="flex justify-center">
           <Link href="/" className="font-semibold m-3 mt-4 items-center gap-2 ">
@@ -70,7 +70,7 @@ const MobileBar = () => {
           </div>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 

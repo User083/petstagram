@@ -1,9 +1,9 @@
 "use client";
-import { ImageCard, NoResults } from "@/components";
+import { ImageCard, NoResults, Loader } from "@/components";
 import { ImagePost } from "@types";
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { IoSearchOutline } from "react-icons/io5";
-import { BiLoaderAlt } from "react-icons/bi";
+
 import { useRouter } from "next/navigation";
 
 interface IProps {
@@ -31,6 +31,7 @@ const Feed = () => {
   const [loading, setLoading] = useState(false);
 
   const handleDelete = async (postId: string) => {
+    setLoading(true);
     try {
       await fetch(`/backend/post/${postId}`, {
         method: "DELETE",
@@ -39,6 +40,8 @@ const Feed = () => {
       });
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   const handleSearch = (e: { preventDefault: () => void }) => {
@@ -49,13 +52,15 @@ const Feed = () => {
   };
   const fetchPosts = async () => {
     setLoading(true);
-    const response = await fetch("/backend/post");
-    await response
-      .json()
-      .then((data) => {
-        setPosts(data);
-      })
-      .finally(() => setLoading(false));
+    try {
+      await fetch("/backend/post").then(async (res) =>
+        setPosts(await res.json())
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -63,7 +68,7 @@ const Feed = () => {
   }, []);
 
   return (
-    <section className="flex flex-col my-10 gap-10 w-full ">
+    <section className="flex flex-col my-10 gap-10 w-full justify-center items-center">
       {/* <form className="top-10 bg-white flex" onSubmit={handleSearch}>
         <input
           className=" relative md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-primary focus:border-2 rounded-full md:top-0 w-[300px] md:w-[350px] p-3 focus:ring-primary"
@@ -80,9 +85,7 @@ const Feed = () => {
         </button>
       </form> */}
       {loading ? (
-        <p className="animate-pulse  title">
-          <BiLoaderAlt className="animate-spin text-6xl text-primary" />
-        </p>
+        <Loader />
       ) : (
         <PostList posts={posts} handleDelete={handleDelete} />
       )}

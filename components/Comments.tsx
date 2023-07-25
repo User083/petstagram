@@ -1,9 +1,11 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { FaUserCircle } from "react-icons/fa";
 
 import { useSession } from "next-auth/react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import Loader from "./Loader";
 
 interface IProps {
   isPostingComment: Boolean;
@@ -29,33 +31,50 @@ interface IUser {
 
 const CommentCard = ({ comment, postedBy, _createdAt }: IComment) => {
   const [poster, setPoster] = useState<IUser>();
+  const [isLoading, setIsLoading] = useState(false);
   const findUser = async (id: string) => {
-    const response = await fetch(`/backend/users/${id}`);
-    const data = await response.json();
-    setPoster(data[0]);
+    setIsLoading(true);
+    try {
+      const data = await fetch(`/backend/users/${id}`).then(
+        async (res) => await res.json()
+      );
+      setPoster(data[0]);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
   useEffect(() => {
     findUser(postedBy._id);
   }, []);
 
   return (
-    <div className="px-1 py-1 flex flex-col">
-      <div className="flex gap-2 items-center">
-        <Image
-          src={poster?.profilePicture || ""}
-          alt="Profile picture"
-          height={30}
-          width={30}
-          className="rounded-full"
-        />
+    <section className="px-1 py-1 flex flex-col">
+      {isLoading && <Loader />}
+      {!isLoading && (
+        <>
+          <div className="flex gap-2 items-center">
+            <Image
+              src={poster?.profilePicture}
+              alt="Profile picture"
+              height={30}
+              width={30}
+              className="rounded-full"
+              priority={false}
+            />
 
-        <p className="mt-1 text-sm">
-          <span className="font-semibold text-medium">{poster?.userName}</span>{" "}
-          {comment}
-        </p>
-      </div>
-      <p className="text-xs text-gray-400 ml-10">posted {"1 day"} ago</p>
-    </div>
+            <p className="mt-1 text-sm">
+              <span className="font-semibold text-medium">
+                {poster?.userName}
+              </span>{" "}
+              {comment}
+            </p>
+          </div>
+          <p className="text-xs text-gray-400 ml-10">posted {"1 day"} ago</p>
+        </>
+      )}
+    </section>
   );
 };
 

@@ -10,6 +10,7 @@ import Comments from "./Comments";
 import Like from "./Like";
 import PostOptions from "./PostOptions";
 import MobileBar from "./MobileBar";
+import Loader from "./Loader";
 
 export {
   Sidebar,
@@ -24,4 +25,5 @@ export {
   Like,
   PostOptions,
   MobileBar,
+  Loader,
 };
