@@ -1,8 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { FaUserCircle } from "react-icons/fa";
-
 import { useSession } from "next-auth/react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Loader from "./Loader";
@@ -119,6 +116,7 @@ const Comments = ({
               className="text-sm font-semibold text-gray-500 hover:text-primary"
               onClick={addComment}
               name="Add comment"
+              aria-label="Add comment"
             >
               {isPostingComment ? "Posting..." : "Post"}
             </button>

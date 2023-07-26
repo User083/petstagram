@@ -109,6 +109,8 @@ const Sidebar = () => {
         </nav>
         <section className="relative mt-20">
           <button
+            aria-label="More"
+            name="More"
             className="w-full flex xl:justify-start justify-center rounded-xl cursor-default "
             onClick={() => {
               setShowMenu((prev) => !prev);
@@ -128,6 +130,7 @@ const Sidebar = () => {
                   <>
                     <button
                       name="Sign out"
+                      aria-label="Sign out"
                       onClick={() => {
                         signOut();
                       }}

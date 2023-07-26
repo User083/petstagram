@@ -133,6 +133,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
                             setShowOptions(false);
                           }}
                           name="Edit Profile"
+                          aria-label="Edit profile"
                           className="text-sm text-white py-2 px-2"
                         >
                           Edit Profile
@@ -144,6 +145,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
                           }}
                           className="text-sm text-white py-2 px-2"
                           name="Sign out"
+                          aria-label="Sign out"
                         >
                           Sign out
                         </button>
@@ -159,6 +161,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
                               setShowOptions(false);
                             }}
                             name="Unfollow"
+                            aria-label="Unfollow"
                             className="text-sm text-white py-2 px-2"
                           >
                             Unfollow
@@ -172,6 +175,7 @@ const MyProfile = ({ params }: { params: { userId: string } }) => {
                             }}
                             className="text-sm text-white py-2 px-2"
                             name="Follow"
+                            aria-label="Follow"
                           >
                             Follow
                           </button>

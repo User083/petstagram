@@ -30,6 +30,7 @@ const PostOptions = ({
               }}
               name="Delete"
               type="button"
+              aria-label="Delete"
             >
               <MdDelete className="text-2xl " />
               Delete
@@ -46,6 +47,7 @@ const PostOptions = ({
           </Link>
           <button
             type="button"
+            aria-label="Cancel"
             className="py-2 px-2 flex gap-2 w-full flex items-center justify-center pointer-events-auto"
             onClick={() => {
               setShowOptions((prev: boolean) => !prev);

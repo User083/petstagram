@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { client } from "@utils/client";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { SanityAssetDocument } from "next-sanity";
-import { SanityImageAssetDocument } from "next-sanity";
 import Image from "next/image";
 import { topics } from "@utils/constants";
 import { useSession } from "next-auth/react";
@@ -11,7 +10,7 @@ import { useRouter } from "next/navigation";
 import Loader from "./Loader";
 
 const Upload = () => {
-  const { data: session, update } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
@@ -182,6 +181,7 @@ const Upload = () => {
                   type="button"
                   className=" p-2 rounded lg:w-44 outline-none w-28 bg-primary text-white"
                   name="Upload"
+                  aria-label="Upload"
                 >
                   Upload
                 </button>
@@ -195,6 +195,7 @@ const Upload = () => {
                   type="button"
                   className="border-gray-300 p-2 rounded lg:w-44 outline-none w-28 border-2 hover:border-primary"
                   name="Discard"
+                  aria-label="Discard"
                 >
                   Discard
                 </button>

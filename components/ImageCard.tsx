@@ -5,20 +5,13 @@ import Link from "next/link";
 import { ImagePost } from "@types";
 import { MdVerified } from "react-icons/md";
 import { IoChatbubbleOutline } from "react-icons/io5";
-import {
-  useState,
-  useEffect,
-  FormEvent,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useState, FormEvent, Dispatch, SetStateAction } from "react";
 import { topics } from "@utils/constants";
 import Comments from "./Comments";
 import Like from "./Like";
 import { useSession } from "next-auth/react";
 import { FiMoreHorizontal } from "react-icons/fi";
 import PostOptions from "./PostOptions";
-import { useRouter } from "next/navigation";
 
 interface IProps {
   post: ImagePost;

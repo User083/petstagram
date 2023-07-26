@@ -27,7 +27,7 @@ const Like = ({ handleDislike, handleLike, likes, setLikes }: IProps) => {
   }, []);
   return (
     <>
-      <button type="button" name="Like Button">
+      <button type="button" name="Like Button" aria-label="Like Button">
         {liked ? (
           <IoHeart
             className="text-primary cursor-pointer text-2xl"
