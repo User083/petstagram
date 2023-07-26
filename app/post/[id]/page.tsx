@@ -90,19 +90,20 @@ const Details = ({ params }: { params: { id: string } }) => {
     <>
       {isLoading && <Loader />}
       {post && !isLoading && (
-        <article className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap h-full min-h-screen">
-          <section className="relative flex-2 w-full lg:w-9/12 flex justify-center items-center bg-black">
-            <div className="opacity-90 absolute top-6 left-2 lg:left-6 flex gap-6 z-50">
+        <article className="flex w-full h-full absolute left-0 bg-white flex-wrap lg:flex-nowrap">
+          <section className="relative flex-1 lg:w-[1000px] bg-black h-full px-2 py-2 sm:flex-2">
+            <span className="">
               <button
-                className="cursor-pointer "
+                className="cursor-pointer opacity-90"
                 onClick={() => router.back()}
                 name="Cancel"
+                aria-label="Cancel"
               >
-                <MdOutlineCancel className="text-white text-[35px] hover:opacity-90" />
+                <MdOutlineCancel className="text-white text-3xl hover:opacity-90" />
               </button>
-            </div>
+            </span>
 
-            <div className="relative lg:h-[100vh] h-[80vh] w-[300px] md:w-[900px] lg:w-[1200px]">
+            <div className="relative lg:h-[100vh] h-full w-screen md:w-[900px] lg:w-[1200px]">
               <Image
                 alt={post.caption}
                 src={post?.image?.asset.url}
@@ -112,13 +113,14 @@ const Details = ({ params }: { params: { id: string } }) => {
               />
             </div>
           </section>
-          <section className="relative w-[1000px] md:w-[900px] lg:w-[600px]">
+          <section className="relative w-full md:w-[900px] lg:w-[600px] h-full">
             <div className="lg:mt-20 mt-10">
               <Link
                 href={`/profile/${post.postedBy._id}`}
                 aria-label="View User Profile"
+                className="flex mb-4"
               >
-                <span className="flex gap-4 mb-4 w-full pl-10">
+                <span className="flex gap-4 w-full ml-10 items-center">
                   <Image
                     width={60}
                     height={60}
@@ -137,7 +139,7 @@ const Details = ({ params }: { params: { id: string } }) => {
                 </span>
               </Link>
 
-              <div className="px-10">
+              <div className="px-10 mt-5">
                 <p className=" text-md text-gray-600">{post.caption}</p>
               </div>
               <div className="mt-5 px-10">

@@ -104,8 +104,8 @@ const Comments = ({
         )}
       </div>
       {session?.user?._id && (
-        <div className="absolute bottom-0 left-0 pb-6 px-2 md:px-10 border-t">
-          <form className="flex gap-4" onSubmit={addComment}>
+        <div className="absolute bottom-0 left-0 pb-6 px-10 border-t w-full">
+          <form className="flex gap-4 mt-5" onSubmit={addComment}>
             <input
               value={comment}
               onChange={(e) => setComment(e.target.value)}
