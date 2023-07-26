@@ -90,9 +90,9 @@ const Details = ({ params }: { params: { id: string } }) => {
     <>
       {isLoading && <Loader />}
       {post && !isLoading && (
-        <article className="flex w-full h-full absolute left-0 bg-white flex-wrap lg:flex-nowrap">
-          <section className="relative flex-1 lg:w-[1000px] bg-black h-full px-2 py-2 sm:flex-2">
-            <span className="">
+        <article className="flex w-full h-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap">
+          <section className="relative flex-1 lg:w-[1000px] bg-black h-full py-2 sm:flex-2">
+            <span className="px-2">
               <button
                 className="cursor-pointer opacity-90"
                 onClick={() => router.back()}

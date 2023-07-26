@@ -76,9 +76,9 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
   };
 
   return (
-    <article className="flex flex-col border-b-2 border-gray-200 pb-6 relative z-0 w-[250px] md:w-[400px] lg:w-[700px]">
+    <article className="flex flex-col border-b-2 border-gray-200 relative z-0 w-full md:w-[600px] lg:w-[700px] md:min-h-fit h-fit min-h-screen snap-center  overflow-hidden">
       <section>
-        <span className="flex justify-between items-center">
+        <span className="flex justify-between items-center md:pr-0 pr-5 mb-2">
           <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded items-center">
             <Link
               href={`/profile/${post.postedBy._id}`}
@@ -93,7 +93,8 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
                     alt="Profile Photo"
                     width={60}
                     height={60}
-                    className="object-contain rounded-full"
+                    objectFit="contain"
+                    className="rounded-full"
                   />
                 </>
               </div>
@@ -141,7 +142,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
             prefetch={false}
             aria-label="View post details"
           >
-            <div className="relative bg-gray-100 cursor-pointer rounded w-[250px] md:w-[400px] lg:h-[800px] md:h-[600px] lg:w-[600px] h-[300px] object-cover">
+            <div className="relative bg-gray-100 cursor-pointer rounded w-screen md:w-[600px] lg:h-[800px] md:h-[800px] lg:w-[600px] h-full min-h-[50vh]">
               <Image
                 src={post.image.asset.url}
                 alt="Image Post"
@@ -161,7 +162,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
           ) : (
             <></>
           )}
-          <div className="flex justify-between">
+          <section className="flex justify-between ">
             <div className="flex flex-col gap-1 px-2 py-2">
               <div className="flex gap-2 py-2">
                 <Like
@@ -170,21 +171,19 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
                   handleLike={() => handleLike(true)}
                   handleDislike={() => handleLike(false)}
                 />
-
-                <IoChatbubbleOutline
-                  className="hover:text-gray-400 cursor-pointer text-2xl"
-                  onClick={() => {
-                    setViewComments((prev) => !prev);
-                  }}
-                />
+                <Link href={`/post/${post._id}`} aria-label="Comment on post">
+                  <IoChatbubbleOutline className="hover:text-gray-400 cursor-pointer text-2xl" />
+                </Link>
               </div>
               <p className="font-semibold px-2 text-sm">{likes} likes</p>
-              <p className=" px-2 text-sm">
-                <span className="font-semibold">
-                  {post.postedBy.userName.replace(/\s+/g, "")}{" "}
-                </span>{" "}
-                {post.caption}
-              </p>
+              <span>
+                <p className=" px-2 text-sm text-ellipsis">
+                  <span className="font-semibold">
+                    {post.postedBy.userName.replace(/\s+/g, "")}{" "}
+                  </span>{" "}
+                  {post.caption}
+                </p>
+              </span>
 
               {viewComments ? (
                 <Comments
@@ -236,7 +235,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
                 )
               )}
             </div>
-          </div>
+          </section>
         </div>
       </section>
     </article>
