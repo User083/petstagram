@@ -63,8 +63,7 @@ const MobileBar = () => {
         ) : (
           <div className="flex justify-center">
             {provider && (
-              <Link
-                href="/"
+              <button
                 className="font-semibold m-3 mt-4 items-center gap-2 "
                 aria-label="Sign in"
               >
@@ -72,7 +71,7 @@ const MobileBar = () => {
                   className="text-3xl"
                   onClick={() => signIn(provider.google.id.toString())}
                 />
-              </Link>
+              </button>
             )}
           </div>
         )}

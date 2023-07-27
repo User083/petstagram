@@ -97,6 +97,7 @@ const Sidebar = () => {
                       name="Log in with Google"
                       className="bg-primary text-lg text-white border-[1px] font-semibold px-6 py-3 rounded-md outline-none w-full mt-3 hover:bg-highlight cursor-pointer
                   "
+                      aria-label="Sign In with Google"
                       onClick={() => signIn(provider.google.id.toString())}
                     >
                       Log In with {provider.google.id}
