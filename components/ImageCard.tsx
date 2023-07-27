@@ -18,6 +18,19 @@ interface IProps {
   handleDelete: Dispatch<SetStateAction<string>>;
 }
 
+function DisplayTime(systemTime: string) {
+  let time = systemTime.slice(11, 16);
+  return time;
+}
+
+function DisplayDate(systemTime: string) {
+  let rawDate = systemTime.slice(0, 10);
+  let dateArr = rawDate.split("-");
+
+  let date = dateArr.reverse().toString().replace(/,/g, "-");
+  return date;
+}
+
 const ImageCard = ({ post, handleDelete }: IProps) => {
   const { data: session } = useSession();
   const [likes, setLikes] = useState(post.likes.length);
@@ -110,7 +123,13 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
                   </div>
 
                   <p className="capitalize font-medium text-xs text-gray-500 hidden md:block">
-                    {post._createdAt}
+                    •{" "}
+                    {" " +
+                      DisplayDate(post._createdAt) +
+                      " " +
+                      "•" +
+                      " " +
+                      DisplayTime(post._createdAt)}
                   </p>
                 </div>
               </Link>

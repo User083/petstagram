@@ -92,7 +92,8 @@ const Details = ({ params }: { params: { id: string } }) => {
       {post && !isLoading && (
         <article className="flex w-full h-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap">
           <section className="relative flex-1 lg:w-[1000px] bg-black h-full py-2 sm:flex-2">
-            <span className="px-2">
+            {" "}
+            <span className="px-2 pointer-events-auto">
               <button
                 className="cursor-pointer opacity-90"
                 onClick={() => router.back()}
@@ -101,9 +102,8 @@ const Details = ({ params }: { params: { id: string } }) => {
               >
                 <MdOutlineCancel className="text-white text-3xl hover:opacity-90" />
               </button>
-            </span>
-
-            <div className="relative lg:h-[100vh] h-full w-screen md:w-[900px] lg:w-[1200px]">
+            </span>{" "}
+            <div className="lg:h-[100vh] md:w-[900px] lg:w-[1200px] h-full pointer-events-none">
               <Image
                 alt={post.caption}
                 src={post?.image?.asset.url}
