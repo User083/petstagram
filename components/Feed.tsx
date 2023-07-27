@@ -68,7 +68,7 @@ const Feed = () => {
   }, []);
 
   return (
-    <section className="flex flex-col my-5 gap-10 w-full justify-center items-center snap-proximity snap-y">
+    <section className="flex flex-col my-2 gap-10 w-full justify-center items-center snap-proximity snap-y">
       {/* <form className="top-10 bg-white flex" onSubmit={handleSearch}>
         <input
           className=" relative md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-primary focus:border-2 rounded-full md:top-0 w-[300px] md:w-[350px] p-3 focus:ring-primary"

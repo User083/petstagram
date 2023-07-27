@@ -76,9 +76,9 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
   };
 
   return (
-    <article className="flex flex-col border-b-2 border-gray-200 relative z-0 w-full md:w-[600px] lg:w-[700px] md:min-h-fit h-fit min-h-screen snap-center  overflow-hidden">
+    <article className="flex flex-col border-b-2 pb-2 border-gray-200 w-full md:w-[600px] lg:w-[700px] relative md:min-h-fit h-full snap-center  ">
       <section>
-        <span className="flex justify-between items-center md:pr-0 pr-5 mb-2">
+        <span className="flex justify-between items-center md:pr-0 px-5 my-2">
           <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded items-center">
             <Link
               href={`/profile/${post.postedBy._id}`}
@@ -129,8 +129,8 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
         </span>
       </section>
 
-      <section className="lg:ml-20 flex gap-4 ">
-        <div className="rounded-3xl relative ">
+      <section className="flex lg:ml-20 h-full w-full">
+        <div className="rounded-3xl ">
           <Link
             href={`/post/${post._id}`}
             as={`/post/${post._id}`}
@@ -142,7 +142,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
             prefetch={false}
             aria-label="View post details"
           >
-            <div className="relative bg-gray-100 cursor-pointer rounded w-screen md:w-[600px] lg:h-[800px] md:h-[800px] lg:w-[600px] h-full min-h-[50vh]">
+            <div className="bg-gray-100 cursor-pointer rounded w-screen md:w-[600px] lg:h-[800px] md:h-[800px] lg:w-[600px] h-[65vh] relative">
               <Image
                 src={post.image.asset.url}
                 alt="Image Post"
@@ -162,80 +162,80 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
           ) : (
             <></>
           )}
-          <section className="flex justify-between ">
-            <div className="flex flex-col gap-1 px-2 py-2">
-              <div className="flex gap-2 py-2">
-                <Like
-                  likes={post.likes}
-                  setLikes={setLikes}
-                  handleLike={() => handleLike(true)}
-                  handleDislike={() => handleLike(false)}
-                />
-                <Link href={`/post/${post._id}`} aria-label="Comment on post">
-                  <IoChatbubbleOutline className="hover:text-gray-400 cursor-pointer text-2xl" />
-                </Link>
-              </div>
-              <p className="font-semibold px-2 text-sm">{likes} likes</p>
-              <span>
-                <p className=" px-2 text-sm text-ellipsis">
-                  <span className="font-semibold">
-                    {post.postedBy.userName.replace(/\s+/g, "")}{" "}
-                  </span>{" "}
-                  {post.caption}
-                </p>
-              </span>
+        </div>
+      </section>
+      <section className="flex justify-between h-full w-full px-5">
+        <div className="flex flex-col gap-1 py-2">
+          <div className="flex gap-2 py-2">
+            <Like
+              likes={post.likes}
+              setLikes={setLikes}
+              handleLike={() => handleLike(true)}
+              handleDislike={() => handleLike(false)}
+            />
+            <Link href={`/post/${post._id}`} aria-label="Comment on post">
+              <IoChatbubbleOutline className="hover:text-gray-400 cursor-pointer text-2xl" />
+            </Link>
+          </div>
+          <p className="font-semibold px-2 text-sm">{likes} likes</p>
+          <span>
+            <p className=" px-2 text-sm text-ellipsis">
+              <span className="font-semibold">
+                {post.postedBy.userName.replace(/\s+/g, "")}{" "}
+              </span>{" "}
+              {post.caption}
+            </p>
+          </span>
 
-              {viewComments ? (
-                <Comments
-                  isPostingComment={isPostingComment}
-                  addComment={addComment}
-                  comment={comment}
-                  setComment={setComment}
-                  comments={currentPost.comments}
-                />
+          {viewComments ? (
+            <Comments
+              isPostingComment={isPostingComment}
+              addComment={addComment}
+              comment={comment}
+              setComment={setComment}
+              comments={currentPost.comments}
+            />
+          ) : (
+            <>
+              {" "}
+              {post.comments.length > 0 ? (
+                <Link
+                  href={`/post/${post._id}`}
+                  className="flex px-2 py-1"
+                  aria-label="View all comments"
+                >
+                  <p className="text-sm text-gray-400">
+                    View all {post.comments.length} comments
+                  </p>{" "}
+                </Link>
               ) : (
-                <>
-                  {" "}
-                  {post.comments.length > 0 ? (
-                    <Link
-                      href={`/post/${post._id}`}
-                      className="flex px-2 py-1"
-                      aria-label="View all comments"
-                    >
-                      <p className="text-sm text-gray-400">
-                        View all {post.comments.length} comments
-                      </p>{" "}
-                    </Link>
-                  ) : (
-                    <p className=" px-2 py-1 text-sm text-gray-400">
-                      No comments yet
-                    </p>
-                  )}
-                </>
+                <p className=" px-2 py-1 text-sm text-gray-400">
+                  No comments yet
+                </p>
               )}
-            </div>
-            <div>
-              {topics.map((topic) =>
-                topic.name === post.topic ? (
-                  <Link
-                    aria-label={`Sort by ${topic.name}`}
-                    href={`/?topic=${topic.name}`}
-                    key={topic.name}
-                    className=" group"
-                  >
-                    <p className="text-3xl py-4 px-2 hover:text-primary">
-                      {topic.icon}
-                    </p>
-                    <p className="group-hover:flex hidden text-gray-400 text-xs items-center justify-center border-gray-200 rounded border-[1px]">
-                      {topic.name}
-                    </p>
-                  </Link>
-                ) : (
-                  <></>
-                )
-              )}
-            </div>
-          </section>
+            </>
+          )}
+        </div>
+        <div>
+          {topics.map((topic) =>
+            topic.name === post.topic ? (
+              <Link
+                aria-label={`Sort by ${topic.name}`}
+                href={`/?topic=${topic.name}`}
+                key={topic.name}
+                className=" group"
+              >
+                <p className="text-3xl py-4 px-2 hover:text-primary">
+                  {topic.icon}
+                </p>
+                <p className="group-hover:flex hidden text-gray-400 text-xs items-center justify-center border-gray-200 rounded border-[1px]">
+                  {topic.name}
+                </p>
+              </Link>
+            ) : (
+              <></>
+            )
+          )}
         </div>
       </section>
     </article>
