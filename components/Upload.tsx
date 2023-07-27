@@ -90,7 +90,7 @@ const Upload = () => {
     }
   };
   return (
-    <article className="flex w-full h-full min-h-screen py-0 md:py-10 md:pb-20 justify-center bg-gray-200 z-0">
+    <article className="flex w-full h-full min-h-screen py-0 md:py-10 md:pb-20 justify-center bg-gray-200 z-0 mb-10">
       {isLoading && <Loader />}
       {!isLoading && (
         <>

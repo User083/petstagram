@@ -85,7 +85,7 @@ const Comments = ({
   const { data: session } = useSession();
 
   return (
-    <article className="border-t-2 border-gray-200 pt-4 pb-[100px]">
+    <article className="border-t-2 border-gray-200 pt-4">
       <div className="">
         {comments?.length ? (
           <div>
@@ -104,7 +104,7 @@ const Comments = ({
         )}
       </div>
       {session?.user?._id && (
-        <div className="absolute bottom-0 left-0 pb-6 px-10 border-t w-full">
+        <div className="absolute bottom-0 left-0 pb-20 md:pb-6 px-10 border-t w-full">
           <form className="flex gap-4 mt-5" onSubmit={addComment}>
             <input
               value={comment}

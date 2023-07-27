@@ -15,12 +15,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Provider>
           <main>
             <div className="p-5 w-screen">
-              <div className="flex lg:gap-10 justify-between">
+              <div className="flex lg:gap-10 justify-between mb-10">
                 <div>
                   <Sidebar />
                 </div>
 
-                <div className="w-full z-0">{children}</div>
+                <div className="w-full z-0 ">{children}</div>
               </div>
               <MobileBar />
             </div>
