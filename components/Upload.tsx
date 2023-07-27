@@ -90,11 +90,11 @@ const Upload = () => {
     }
   };
   return (
-    <article className="flex w-full h-full min-h-screen pt-10 lg:pt-20 justify-center bg-gray-200 z-0">
+    <article className="flex w-full h-full min-h-screen py-0 md:py-10 md:pb-20 justify-center bg-gray-200 z-0">
       {isLoading && <Loader />}
       {!isLoading && (
         <>
-          <div className="rounded-lg flex items-center justify-center lg:p-14 flex-wrap gap-3 xl:h-[100vh] 2xl:h-[80vh] 2xl:w-[60%] w-full sm:w-[80%] bg-white mb-20">
+          <div className="rounded-lg flex items-center justify-center flex-wrap gap-3 bg-white px-5 md:px-20 md:my-20">
             <section>
               <p className="text-2xl font-bold">Upload Image</p>
               <p className="text-md text-gray-400 mt-1">Post a new image</p>
