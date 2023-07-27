@@ -22,7 +22,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
                 <div className="w-full z-0">{children}</div>
               </div>
-              {/* <MobileBar /> */}
+              <MobileBar />
             </div>
           </main>
         </Provider>

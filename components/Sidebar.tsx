@@ -26,8 +26,8 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <aside className="hidden xl:block my-5 mb-20">
-      <div className="xl:w-[400px] flex flex-col justify-between mb-10 border-r-2 p-3 px-10">
+    <aside className="hidden xl:block my-5 mb-20 ">
+      <div className="xl:w-[400px] w-[200px] flex flex-col justify-between mb-10 border-r-2 p-3 px-10 min-h-screen sticky">
         <nav>
           <Link href="/" aria-label="Home logo">
             <div className="flex items-center py-1 pb-3 m-3">
