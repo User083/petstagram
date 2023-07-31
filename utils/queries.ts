@@ -65,6 +65,7 @@ export const postDetailQuery = (postId: string | string[]) => {
 export const searchPostsQuery = (searchTerm: string | string[]) => {
   const query = `*[_type == "post" && caption match '${searchTerm}*' || topic match '${searchTerm}*'] {
     _id,
+        _createdAt,
      caption,
        image{
         asset->{

@@ -3,7 +3,6 @@ import { ImageCard, NoResults, Loader } from "@/components";
 import { ImagePost } from "@types";
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { IoSearchOutline } from "react-icons/io5";
-
 import { useRouter } from "next/navigation";
 
 interface IProps {
@@ -27,7 +26,7 @@ const PostList = ({ posts, handleDelete }: IProps) => {
 const Feed = () => {
   const router = useRouter();
   const [posts, setPosts] = useState([]);
-  const [searchText, setSearchText] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleDelete = async (postId: string) => {
@@ -46,8 +45,8 @@ const Feed = () => {
   };
   const handleSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    if (searchText) {
-      router.push(`/search/${searchText}`);
+    if (searchTerm) {
+      router.push(`/search/${searchTerm}`);
     }
   };
   const fetchPosts = async () => {
@@ -69,21 +68,23 @@ const Feed = () => {
 
   return (
     <section className="flex flex-col my-2 gap-10 w-full justify-center items-center snap-proximity snap-y">
-      {/* <form className="top-10 bg-white flex" onSubmit={handleSearch}>
+      <form className="top-10 bg-white flex" onSubmit={handleSearch}>
         <input
-          className=" relative md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-primary focus:border-2 rounded-full md:top-0 w-[300px] md:w-[350px] p-3 focus:ring-primary"
+          className=" relative md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-primary focus:border-2 rounded-full md:top-0 w-[250px] md:w-[350px] p-3 focus:ring-primary"
           type="text"
-          value={searchText}
+          value={searchTerm}
           placeholder="Search posts"
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          aria-label="Search bar"
         />
         <button
           onClick={handleSearch}
           className="md:right-5 right-6 border-gray-300 top-4 pl-4 text-2xl text-gray-400 hover:text-primary"
+          aria-label="Search topic"
         >
           <IoSearchOutline />
         </button>
-      </form> */}
+      </form>
       {loading ? (
         <Loader />
       ) : (

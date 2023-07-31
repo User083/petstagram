@@ -18,7 +18,7 @@ const MobileBar = () => {
     fetchProviders();
   }, []);
   return (
-    <nav className="bottom-0 left-0 fixed m-0 w-full">
+    <nav className="bottom-0 left-0 fixed m-0 w-full block xl:hidden">
       <div className="flex gap-5 justify-center items-center bg-black text-white">
         <div className="flex justify-center">
           <Link

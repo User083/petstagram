@@ -61,7 +61,7 @@ const Sidebar = () => {
               Create
             </Link>
           </div>
-          {/* <Discover /> */}
+          <Discover />
           {session?.user ? (
             <div className="w-full flex xl:justify-start justify-center  hover:bg-gray-200 rounded-xl">
               <div className="xl:flex items-center gap-3">

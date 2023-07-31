@@ -240,7 +240,7 @@ const ImageCard = ({ post, handleDelete }: IProps) => {
             topic.name === post.topic ? (
               <Link
                 aria-label={`Sort by ${topic.name}`}
-                href={`/?topic=${topic.name}`}
+                href={`/search/${topic.name}`}
                 key={topic.name}
                 className=" group"
               >

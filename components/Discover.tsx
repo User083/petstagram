@@ -5,14 +5,13 @@ import { useSearchParams } from "next/navigation";
 import { FiCompass } from "react-icons/fi";
 import { useState } from "react";
 
-const Discover = () => {
+const Discover = ({ params }: { params: { searchTerm: string } }) => {
   const searhParams = useSearchParams();
-  const [showOptions, setShowOptions] = useState(true);
+  const [showOptions, setShowOptions] = useState(false);
 
   const activePetStyle =
     "xl:border-2 xl:border-primary px-3 py-2 rounded xl:rounded-full flex items-center gap-2 justify-center cursor-pointer text-primary";
-  const petStyle =
-    "xl:border-2 hover:bg-primary hover:text-white hover:border-white xl:border-gray-300 px-3 py-2 rounded xl:rounded-full flex items-center gap-2 justify-center cursor-pointer text-black";
+  const petStyle = "";
 
   return (
     <div className="">
@@ -33,14 +32,8 @@ const Discover = () => {
       {showOptions ? (
         <div className="flex gap-3 flex-wrap mt-2">
           {topics.map((topic) => (
-            <Link href={`/?topic=${topic.name}`} key={topic.name}>
-              <div
-                className={
-                  searhParams.get("topic") === topic.name
-                    ? activePetStyle
-                    : petStyle
-                }
-              >
+            <Link href={`/search/${topic.name}`} key={topic.name}>
+              <div className="xl:border-2 hover:bg-primary hover:text-white hover:border-white xl:border-gray-300 px-3 py-2 rounded xl:rounded-full flex items-center gap-2 justify-center cursor-pointer text-black focus:text-primary focus:border-primary">
                 <span className="font-bold text-2xl xl:text-md h-[20px] w-[20px]">
                   {topic.icon}
                 </span>
